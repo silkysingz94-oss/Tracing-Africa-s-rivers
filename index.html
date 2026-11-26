@@ -25,7 +25,7 @@
   --unknown:#a9bac5;
 }
 
-* { box-sizing:border-box; }
+* {box-sizing:border-box}
 
 html,body {
   margin:0;
@@ -47,7 +47,7 @@ header {
   background:#091b29;
 }
 
-.brand { display:flex; flex-direction:column; gap:4px; }
+.brand {display:flex;flex-direction:column;gap:4px}
 
 .eyebrow {
   color:var(--accent);
@@ -63,7 +63,7 @@ h1 {
   letter-spacing:-.7px;
 }
 
-.subtitle { color:var(--muted); font-size:11px; }
+.subtitle {color:var(--muted);font-size:11px}
 
 .header-right {
   text-align:right;
@@ -93,7 +93,7 @@ h1 {
   scrollbar-color:#36566d #0a1b28;
 }
 
-.panel-inner { padding:13px; }
+.panel-inner {padding:13px}
 
 .panel h2 {
   font-size:13px;
@@ -107,7 +107,7 @@ h1 {
   border-top:1px solid var(--line);
 }
 
-.section:first-child { border-top:0; padding-top:0; }
+.section:first-child {border-top:0;padding-top:0}
 
 .section-title {
   font-size:10px;
@@ -125,7 +125,7 @@ label {
   margin:9px 0 5px;
 }
 
-select,button { width:100%; }
+select,button {width:100%}
 
 select {
   color:var(--text);
@@ -136,7 +136,7 @@ select {
   outline:none;
 }
 
-input[type="range"] { width:100%; accent-color:var(--accent); }
+input[type="range"] {width:100%;accent-color:var(--accent)}
 
 button {
   background:#15364b;
@@ -150,8 +150,7 @@ button {
   margin-top:7px;
 }
 
-button:hover { background:#20506a; }
-button:disabled { opacity:.4; cursor:not-allowed; }
+button:hover {background:#20506a}
 
 button.primary {
   background:#087c9f;
@@ -164,7 +163,7 @@ button.primary {
   gap:6px;
 }
 
-.button-grid button { margin:0; }
+.button-grid button {margin:0}
 
 .metric-grid {
   display:grid;
@@ -188,7 +187,7 @@ button.primary {
   overflow-wrap:anywhere;
 }
 
-.metric span { color:var(--muted); font-size:10px; }
+.metric span {color:var(--muted);font-size:10px}
 
 .map-column {
   height:100%;
@@ -213,7 +212,7 @@ button.primary {
   font-size:11px;
 }
 
-.map-topbar strong { color:var(--text); }
+.map-topbar strong {color:var(--text)}
 
 #map {
   flex:1;
@@ -234,7 +233,7 @@ button.primary {
   color:var(--muted);
 }
 
-.status { display:flex; align-items:center; gap:7px; }
+.status {display:flex;align-items:center;gap:7px}
 
 .status-dot {
   width:7px;
@@ -243,8 +242,8 @@ button.primary {
   background:#e0a64a;
 }
 
-.status-dot.ready { background:#62d58b; }
-.status-dot.error { background:#ed6574; }
+.status-dot.ready {background:#62d58b}
+.status-dot.error {background:#ed6574}
 
 .progress-wrap {
   background:#071522;
@@ -278,7 +277,7 @@ button.primary {
   font-size:11px;
 }
 
-.swatch { width:23px; height:4px; border-radius:4px; flex:none; }
+.swatch {width:23px;height:4px;border-radius:4px;flex:none}
 
 .destination-item {
   display:flex;
@@ -307,13 +306,24 @@ button.primary {
   line-height:1.6;
 }
 
+.error-box {
+  color:#ff9ba7;
+  background:#351b29;
+  border:1px solid #773749;
+  border-radius:6px;
+  padding:9px;
+  font-size:10px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
   background:#10283a;
   color:#e9f3f8;
 }
 
-.leaflet-popup-content { font-size:12px; line-height:1.6; }
+.leaflet-popup-content {font-size:12px;line-height:1.6}
 
 .leaflet-control-layers {
   background:#10283a;
@@ -321,7 +331,7 @@ button.primary {
   border:1px solid #31566d;
 }
 
-.leaflet-control-layers label { color:#e9f3f8; }
+.leaflet-control-layers label {color:#e9f3f8}
 
 .leaflet-control-zoom a {
   background:#10283a !important;
@@ -329,7 +339,7 @@ button.primary {
   border-color:#31566d !important;
 }
 
-/* Animated river overlay: SVG only */
+/* Animated SVG river overlay */
 .river-flow-svg {
   fill:none;
   stroke:#ffffff;
@@ -343,21 +353,21 @@ button.primary {
 }
 
 @keyframes riverFlowMove {
-  from { stroke-dashoffset:0; }
-  to { stroke-dashoffset:-40; }
+  from {stroke-dashoffset:0}
+  to {stroke-dashoffset:-40}
 }
 
-.paused-animation { animation-play-state:paused !important; }
+.paused-animation {animation-play-state:paused !important}
 
 @media(max-width:1050px) {
-  .app { grid-template-columns:250px minmax(0,1fr); }
-  .right-panel { display:none; }
+  .app {grid-template-columns:250px minmax(0,1fr)}
+  .right-panel {display:none}
 }
 
 @media(max-width:700px) {
-  html,body { overflow:auto; }
-  header { height:auto; min-height:80px; }
-  .header-right { display:none; }
+  html,body {overflow:auto}
+  header {height:auto;min-height:80px}
+  .header-right {display:none}
   .app {
     height:auto;
     min-height:calc(100vh - 80px);
@@ -365,9 +375,9 @@ button.primary {
     flex-direction:column;
     overflow:visible;
   }
-  .panel { height:250px; min-height:250px; flex:none; }
-  .map-column { height:65vh; min-height:500px; flex:none; }
-  .right-panel { display:block; }
+  .panel {height:250px;min-height:250px;flex:none}
+  .map-column {height:65vh;min-height:500px;flex:none}
+  .right-panel {display:block}
 }
 </style>
 </head>
@@ -400,12 +410,13 @@ button.primary {
       <div class="progress-bar" id="progressBar"></div>
     </div>
     <div class="progress-text">
-      <span id="progressLabel">Preparing map</span>
+      <span id="progressLabel">Starting</span>
       <strong id="progressPercent">0%</strong>
     </div>
     <div class="small-note" id="loadingMessage">
-      The map is ready. River data will load progressively.
+      Initialising map and river service…
     </div>
+    <div id="errorMessage"></div>
   </div>
 
   <div class="section">
@@ -460,24 +471,20 @@ button.primary {
   <div class="section">
     <div class="section-title">Export</div>
     <button id="exportBtn">Export loaded rivers as GeoJSON</button>
-    <div class="small-note">
-      Export includes all river reaches downloaded so far, not just the visible filtered reaches.
-    </div>
   </div>
 
   <div class="section">
-    <div class="section-title">Data information</div>
+    <div class="section-title">Data source</div>
     <div class="small-note">
-      The map uses HydroRIVERS geometry. Major rivers are requested first. Smaller river reaches are
-      subsequently downloaded and added to the map in batches. The complete available network is
-      progressively built in the background.
+      HydroRIVERS v10 · ArcGIS FeatureServer · Layer 0.
+      Major rivers are loaded first, followed by the remaining reaches.
     </div>
   </div>
 
 </div>
 </aside>
 
-<!-- CENTRAL MAP -->
+<!-- MAP -->
 <section class="map-column">
   <div class="map-topbar">
     <span><strong>Africa river drainage network</strong></span>
@@ -489,7 +496,7 @@ button.primary {
   <div class="map-footer">
     <span class="status">
       <span class="status-dot" id="statusDot"></span>
-      <span id="statusText">Map ready · waiting for river data</span>
+      <span id="statusText">Map ready</span>
     </span>
     <span id="loadedCount">0 reaches loaded</span>
   </div>
@@ -514,7 +521,7 @@ button.primary {
       </div>
       <div class="metric">
         <strong id="majorRivers">0</strong>
-        <span>Major reaches loaded</span>
+        <span>Major reaches</span>
       </div>
       <div class="metric">
         <strong id="totalArea">0</strong>
@@ -529,26 +536,26 @@ button.primary {
     <div class="legend-row"><span class="swatch" style="background:var(--indian)"></span>Indian Ocean</div>
     <div class="legend-row"><span class="swatch" style="background:var(--med)"></span>Mediterranean Sea</div>
     <div class="legend-row"><span class="swatch" style="background:var(--redsea)"></span>Red Sea</div>
-    <div class="legend-row"><span class="swatch" style="background:var(--inland)"></span>Inland drainage</div>
+    <div class="legend-row"><span class="swatch" style="background:var(--inland)"></span>Inland basin</div>
     <div class="legend-row"><span class="swatch" style="background:var(--unknown)"></span>Unclassified / other</div>
   </div>
 
   <div class="section">
     <div class="section-title">Destination counts</div>
-    <div id="destinationStats" class="small-note">Waiting for river data…</div>
+    <div id="destinationStats" class="small-note">Waiting for data…</div>
   </div>
 
   <div class="section">
     <div class="section-title">Selected river reach</div>
-    <div id="riverDetails">Select a river line on the map to inspect its attributes.</div>
+    <div id="riverDetails">Select a river line to inspect its attributes.</div>
   </div>
 
   <div class="section">
     <div class="section-title">Map interpretation</div>
     <div class="small-note">
-      Colours represent approximate drainage destination groups. White animated dashes highlight
-      selected major river reaches. The animation follows the geometry coordinate direction and does
-      not establish actual water velocity or downstream direction.
+      Destination colours are approximate geographic groupings, not a verified basin-outlet classification.
+      White animated dashes highlight selected major reaches. Animation direction follows the geometry
+      coordinate order and is not a measurement of actual water velocity.
     </div>
   </div>
 
@@ -560,11 +567,11 @@ button.primary {
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-/* ============================================================
-   SETTINGS
-============================================================ */
+/* =========================================================
+   CONFIGURATION
+========================================================= */
 
-const SERVICE_URL =
+const SERVICE =
   "https://maps.fsc.org/server/rest/services/Hosted/Optimized_Hyrdo/FeatureServer/0/query";
 
 const AFRICA_BBOX = {
@@ -575,9 +582,9 @@ const AFRICA_BBOX = {
   spatialReference:{wkid:4326}
 };
 
-const BATCH_SIZE = 250;
-const WORKER_COUNT = 3;
-const MAJOR_AREA_THRESHOLD = 500;
+const BATCH_SIZE = 200;
+const WORKER_COUNT = 2;
+const MAJOR_AREA = 500;
 
 const DESTINATIONS = {
   atlantic:{label:"Atlantic Ocean",color:"#36b9e9"},
@@ -591,22 +598,18 @@ const DESTINATIONS = {
 let allFeatures = [];
 let visibleFeatures = [];
 let loadedIds = new Set();
-let flowAnimationLayers = [];
+let flowPaths = [];
 
-let currentSpeed = 1.4;
 let currentWidth = 1.2;
+let currentSpeed = 1.4;
 let animationPaused = false;
-let dataLoaded = false;
-let loadingFinished = false;
-let totalFeatureIds = 0;
-let downloadedFeatureCount = 0;
+let loadingComplete = false;
+let totalIds = 0;
+let failedBatches = 0;
 
-/* ============================================================
+/* =========================================================
    MAP INITIALIZATION
-
-   Map and basemap appear immediately. Data loading does not
-   block map creation.
-============================================================ */
+========================================================= */
 
 const map = L.map("map",{
   zoomControl:true,
@@ -621,8 +624,8 @@ const canvasRenderer = L.canvas({padding:0.5});
 const svgRenderer = L.svg({pane:"flowPane",padding:0.5});
 
 const africaBounds = L.latLngBounds(
-  L.latLng(-36,-20),
-  L.latLng(38,55)
+  [-36,-20],
+  [38,55]
 );
 
 const baseMaps = {
@@ -652,26 +655,24 @@ const flowLayer = L.layerGroup().addTo(map);
 
 map.fitBounds(africaBounds,{padding:[15,15]});
 
-/* ============================================================
-   HELPERS
-============================================================ */
+/* =========================================================
+   GENERAL HELPERS
+========================================================= */
 
 const $ = id => document.getElementById(id);
 
-function numberFormat(value) {
+function fmt(value) {
   const n = Number(value);
-  if (!Number.isFinite(n)) return "—";
-  return n.toLocaleString("en-US",{maximumFractionDigits:1});
+  return Number.isFinite(n)
+    ? n.toLocaleString("en-US",{maximumFractionDigits:1})
+    : "—";
 }
 
 function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g,char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  })[char]);
+  return String(value).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#039;"
+  })[c]);
 }
 
 function setStatus(message,type="loading") {
@@ -680,87 +681,125 @@ function setStatus(message,type="loading") {
     (type==="ready" ? " ready" : type==="error" ? " error" : "");
 }
 
-function setProgress(percent,label,message) {
-  const value = Math.max(0,Math.min(100,percent));
-  $("progressBar").style.width = value + "%";
-  $("progressPercent").textContent = Math.round(value) + "%";
-  $("progressLabel").textContent = label;
-  if (message) $("loadingMessage").textContent = message;
+function setProgress(value,label,message) {
+  value=Math.max(0,Math.min(100,value));
+  $("progressBar").style.width=value+"%";
+  $("progressPercent").textContent=Math.round(value)+"%";
+  $("progressLabel").textContent=label;
+  if (message) $("loadingMessage").textContent=message;
 }
 
-function getProperty(p,names) {
+function showError(message) {
+  $("errorMessage").innerHTML =
+    '<div class="error-box">'+escapeHTML(message)+'</div>';
+}
+
+function clearError() {
+  $("errorMessage").innerHTML="";
+}
+
+/*
+  Case-insensitive property lookup.
+  ArcGIS service field names are lowercase in this layer.
+*/
+
+function getProperty(properties,names) {
+  if (!properties) return null;
+
+  const keys=Object.keys(properties);
+
   for (const name of names) {
-    if (p && p[name] !== undefined && p[name] !== null) return p[name];
+    const key=keys.find(
+      k=>k.toLowerCase()===name.toLowerCase()
+    );
+
+    if (key!==undefined && properties[key]!==null &&
+        properties[key]!==undefined) {
+      return properties[key];
+    }
   }
+
   return null;
 }
 
-function numericProperty(p,names) {
-  const n = Number(getProperty(p,names));
+function numProp(properties,names) {
+  const value=getProperty(properties,names);
+  const n=Number(value);
   return Number.isFinite(n) ? n : 0;
 }
 
+/* =========================================================
+   HYDRORIVERS ATTRIBUTE HELPERS
+========================================================= */
+
+function getObjectId(feature) {
+  return feature.id ??
+    getProperty(feature.properties,["objectid"]) ??
+    null;
+}
+
+function getRiverId(feature) {
+  return getProperty(feature.properties,["hyriv_id"]) ??
+    getObjectId(feature);
+}
+
 function getUpstreamArea(feature) {
-  return numericProperty(feature.properties,["UPLAND_SKM"]);
+  return numProp(feature.properties,["upland_skm"]);
+}
+
+function getCatchmentArea(feature) {
+  return numProp(feature.properties,["catch_skm"]);
 }
 
 function getStreamOrder(feature) {
-  return numericProperty(feature.properties,[
-    "ORD_STRA","ORD_CLAS","ORD_FLOW","ORD_STRAH"
+  return numProp(feature.properties,[
+    "ord_stra","ord_clas","ord_flow"
   ]);
 }
 
 function getRiverName(feature) {
-  return getProperty(feature.properties,[
-    "MAIN_RIV","RIV_NAME","RIVER_NAME","NAME","name"
-  ]) || "Unnamed river reach";
-}
-
-function getReachId(feature) {
-  return getProperty(feature.properties,[
-    "HYRIV_ID","OBJECTID","FID","ID","id"
-  ]) ?? "Not available";
+  return getProperty(feature.properties,["main_riv"]) ||
+    "Unnamed river reach";
 }
 
 function getLength(feature) {
-  return numericProperty(feature.properties,["LENGTH_KM","LENGTH"]);
+  return numProp(feature.properties,["length_km"]);
 }
 
-function isMajorRiver(feature) {
-  return getUpstreamArea(feature)>=MAJOR_AREA_THRESHOLD ||
-         getStreamOrder(feature)>=5;
+function isMajor(feature) {
+  return getUpstreamArea(feature)>=MAJOR_AREA ||
+    getStreamOrder(feature)>=5;
 }
 
-/* ============================================================
-   APPROXIMATE DESTINATION CLASSIFICATION
+/* =========================================================
+   DESTINATION CLASSIFICATION
 
-   For a definitive scientific classification, use verified
-   basin outlets and HydroBASINS connectivity.
-============================================================ */
+   Approximate geographic classification. For scientific
+   basin attribution, connect reaches to verified basin outlets.
+========================================================= */
 
 function classifyDestination(feature) {
-  const p = feature.properties || {};
+  const p=feature.properties || {};
 
-  const endorheic = getProperty(p,["ENDORHEIC"]);
+  const endorheic=getProperty(p,["endorheic"]);
 
-  if (
-    endorheic===1 || endorheic==="1" ||
-    String(endorheic).toLowerCase()==="yes" ||
-    String(endorheic).toLowerCase()==="true"
-  ) return "inland";
+  if (Number(endorheic)===1) return "inland";
 
-  const geometry = feature.geometry;
+  const geometry=feature.geometry;
   if (!geometry) return "unknown";
 
-  const coords = geometry.type==="MultiLineString"
-    ? geometry.coordinates.flat()
-    : geometry.coordinates;
+  const parts=geometry.type==="MultiLineString"
+    ? geometry.coordinates
+    : [geometry.coordinates];
 
-  if (!coords || !coords.length) return "unknown";
+  if (!parts.length) return "unknown";
 
-  const terminal = coords[coords.length-1];
-  const lon = Number(terminal[0]);
-  const lat = Number(terminal[1]);
+  const lastPart=parts[parts.length-1];
+  if (!lastPart || !lastPart.length) return "unknown";
+
+  const last=lastPart[lastPart.length-1];
+  const lon=Number(last[0]);
+  const lat=Number(last[1]);
 
   if (!Number.isFinite(lon) || !Number.isFinite(lat)) return "unknown";
 
@@ -774,35 +813,90 @@ function classifyDestination(feature) {
   return "unknown";
 }
 
-/* ============================================================
-   ARCGIS QUERY HELPERS
-============================================================ */
+/* =========================================================
+   GEOMETRY VALIDATION AND CONVERSION
 
-function queryURL(params) {
-  const url = new URL(SERVICE_URL);
-  Object.entries(params).forEach(([key,value]) => {
+   The service is requested in EPSG:4326. This also handles
+   Web Mercator coordinates if a response ignores outSR.
+========================================================= */
+
+function mercatorToLonLat(x,y) {
+  const lon=x/20037508.34*180;
+  let lat=y/20037508.34*180;
+  lat=180/Math.PI*(2*Math.atan(Math.exp(lat*Math.PI/180))-Math.PI/2);
+  return [lon,lat];
+}
+
+function normalizeCoordinates(coords) {
+  if (!Array.isArray(coords)) return coords;
+
+  if (
+    coords.length>=2 &&
+    typeof coords[0]==="number" &&
+    typeof coords[1]==="number"
+  ) {
+    const x=coords[0], y=coords[1];
+
+    if (Math.abs(x)>180 || Math.abs(y)>90) {
+      return mercatorToLonLat(x,y);
+    }
+
+    return [x,y];
+  }
+
+  return coords.map(normalizeCoordinates);
+}
+
+function normalizeFeature(feature) {
+  if (!feature || !feature.geometry) return null;
+
+  const g=feature.geometry;
+
+  if (g.type!=="LineString" && g.type!=="MultiLineString") {
+    return null;
+  }
+
+  g.coordinates=normalizeCoordinates(g.coordinates);
+
+  if (!g.coordinates || !g.coordinates.length) return null;
+
+  feature.properties=feature.properties || {};
+
+  return feature;
+}
+
+/* =========================================================
+   SERVICE REQUESTS
+========================================================= */
+
+function makeURL(params) {
+  const url=new URL(SERVICE);
+  Object.entries(params).forEach(([key,value])=>{
     url.searchParams.set(key,value);
   });
   return url.toString();
 }
 
 async function requestJSON(url) {
-  const response = await fetch(url);
+  const response=await fetch(url);
 
   if (!response.ok) {
-    throw new Error("Service returned HTTP " + response.status);
+    throw new Error("HTTP "+response.status+" from HydroRIVERS service.");
   }
 
-  const result = await response.json();
+  const data=await response.json();
 
-  if (result.error) {
-    throw new Error(result.error.message || "ArcGIS query error");
+  if (data.error) {
+    throw new Error(
+      data.error.message ||
+      "ArcGIS returned an error."
+    );
   }
 
-  return result;
+  return data;
 }
 
-function baseSpatialParams() {
+function spatialParameters() {
   return {
     geometry:JSON.stringify(AFRICA_BBOX),
     geometryType:"esriGeometryEnvelope",
@@ -811,30 +905,42 @@ function baseSpatialParams() {
   };
 }
 
-async function getObjectIds(where) {
-  const params = {
+/*
+  Request every matching ObjectID. The server can return the
+  full ID list even though individual feature queries are capped.
+*/
+
+async function getObjectIds(whereClause) {
+  const params={
     f:"json",
-    where:where,
+    where:whereClause,
     returnIdsOnly:"true",
-    ...baseSpatialParams()
+    ...spatialParameters()
   };
 
-  const result = await requestJSON(queryURL(params));
-  return result.objectIds || [];
+  const result=await requestJSON(makeURL(params));
+
+  if (!Array.isArray(result.objectIds)) {
+    throw new Error("The service did not return an objectIds array.");
+  }
+
+  return result.objectIds;
 }
 
-/* ============================================================
-   CONVERT ARCGIS GEOMETRY IF NECESSARY
-============================================================ */
+/* =========================================================
+   FETCH FEATURES BY OBJECTID
 
-function convertEsriFeature(feature) {
-  const g = feature.geometry;
+   Request GeoJSON first, then ArcGIS JSON as a fallback.
+========================================================= */
+
+function convertArcGISFeature(feature) {
+  const g=feature.geometry;
   if (!g) return null;
 
   let geometry;
 
   if (g.paths) {
-    geometry = g.paths.length===1
+    geometry=g.paths.length===1
       ? {type:"LineString",coordinates:g.paths[0]}
       : {type:"MultiLineString",coordinates:g.paths};
   } else {
@@ -843,22 +949,17 @@ function convertEsriFeature(feature) {
 
   return {
     type:"Feature",
+    id:feature.attributes?.objectid ??
+       feature.attributes?.OBJECTID,
     properties:feature.attributes || {},
-    geometry:geometry
+    geometry
   };
 }
 
-/* ============================================================
-   FETCH A BATCH
-
-   GeoJSON is attempted first. If the service does not support
-   GeoJSON output, it falls back to standard ArcGIS JSON.
-============================================================ */
-
-async function fetchBatch(ids) {
+async function fetchFeatureBatch(ids) {
   if (!ids.length) return [];
 
-  const common = {
+  const common={
     objectIds:ids.join(","),
     outFields:"*",
     returnGeometry:"true",
@@ -866,92 +967,98 @@ async function fetchBatch(ids) {
   };
 
   try {
-    const geo = await requestJSON(queryURL({
+    const result=await requestJSON(makeURL({
       f:"geojson",
       ...common
     }));
 
-    if (geo.type==="FeatureCollection") {
-      return geo.features || [];
+    if (result.type==="FeatureCollection" &&
+        Array.isArray(result.features)) {
+      return result.features.map(normalizeFeature).filter(Boolean);
     }
 
-    if (geo.features) {
-      return geo.features.map(convertEsriFeature).filter(Boolean);
+    if (Array.isArray(result.features)) {
+      return result.features
+        .map(convertArcGISFeature)
+        .map(normalizeFeature)
+        .filter(Boolean);
     }
-  } catch (error) {
-    // Fall through to ArcGIS JSON format.
+  } catch (geoError) {
+    console.warn("GeoJSON query failed; trying ArcGIS JSON.",geoError);
   }
 
-  const arcgis = await requestJSON(queryURL({
+  const result=await requestJSON(makeURL({
     f:"json",
     ...common
   }));
 
-  return (arcgis.features || [])
-    .map(convertEsriFeature)
+  return (result.features || [])
+    .map(convertArcGISFeature)
+    .map(normalizeFeature)
     .filter(Boolean);
 }
 
-/* ============================================================
-   ADD FEATURES TO THE MAP AS THEY ARRIVE
+/* =========================================================
+   RENDERING
+========================================================= */
 
-   This is the key performance change: each batch is drawn
-   immediately instead of waiting for the complete dataset.
-============================================================ */
-
-function addFeaturesToMap(features) {
-  if (!features.length) return;
-
-  const destinationFilter = $("destinationFilter").value;
-  const minArea = Number($("sizeFilter").value);
-
-  const width = currentWidth;
-
-  features.forEach(feature => {
-    const destination = feature.properties._destination || "unknown";
-    const style = DESTINATIONS[destination] || DESTINATIONS.unknown;
-
-    const shouldDisplay =
-      (destinationFilter==="all" || destinationFilter===destination) &&
-      getUpstreamArea(feature)>=minArea;
-
-    if (!shouldDisplay) return;
-
-    const base = L.geoJSON(feature,{
-      renderer:canvasRenderer,
-      style:{
-        color:style.color,
-        weight:width,
-        opacity:0.82,
-        lineCap:"round",
-        lineJoin:"round"
-      },
-      onEachFeature:(f,layer) => {
-        layer.on("click",() => showRiverDetails(f));
-      }
-    });
-
-    riverLayer.addLayer(base);
-
-    if (isMajorRiver(feature)) {
-      addAnimatedOverlay(feature);
-    }
-  });
+function currentDestinationFilter() {
+  return $("destinationFilter").value;
 }
 
-function addAnimatedOverlay(feature) {
-  const geometry = feature.geometry;
+function currentAreaFilter() {
+  return Number($("sizeFilter").value);
+}
 
-  const paths = geometry.type==="LineString"
+function featurePassesFilter(feature) {
+  const dest=feature.properties._destination || "unknown";
+  const selected=currentDestinationFilter();
+  const minArea=currentAreaFilter();
+
+  return (selected==="all" || selected===dest) &&
+    getUpstreamArea(feature)>=minArea;
+}
+
+function addOneFeature(feature) {
+  if (!featurePassesFilter(feature)) return;
+
+  const destination=feature.properties._destination || "unknown";
+  const style=DESTINATIONS[destination] || DESTINATIONS.unknown;
+
+  const base=L.geoJSON(feature,{
+    renderer:canvasRenderer,
+    style:{
+      color:style.color,
+      weight:currentWidth,
+      opacity:0.85,
+      lineCap:"round",
+      lineJoin:"round"
+    },
+    onEachFeature:(f,layer)=>{
+      layer.on("click",()=>showRiverDetails(f));
+    }
+  });
+
+  riverLayer.addLayer(base);
+
+  if (isMajor(feature)) {
+    addFlowOverlay(feature);
+  }
+}
+
+function addFlowOverlay(feature) {
+  const geometry=feature.geometry;
+
+  const lines=geometry.type==="LineString"
     ? [geometry.coordinates]
     : geometry.coordinates;
 
-  paths.forEach(path => {
-    if (!path || path.length<2) return;
+  lines.forEach(line=>{
+    if (!line || line.length<2) return;
 
-    const latlngs = path.map(c => [c[1],c[0]]);
+    const latlngs=line.map(c=>[c[1],c[0]]);
 
-    const flow = L.polyline(latlngs,{
+    const flow=L.polyline(latlngs,{
       renderer:svgRenderer,
       pane:"flowPane",
       color:"#ffffff",
@@ -962,197 +1069,197 @@ function addAnimatedOverlay(feature) {
       interactive:false
     });
 
-    flow.on("add",() => {
-      const element = flow.getElement();
-      if (!element) return;
+    flow.on("add",()=>{
+      const path=flow.getElement();
+      if (!path) return;
 
-      element.classList.add("river-flow-svg");
-      element.style.animationDuration=currentSpeed+"s";
+      path.classList.add("river-flow-svg");
+      path.style.animationDuration=currentSpeed+"s";
 
       if (animationPaused) {
-        element.classList.add("paused-animation");
+        path.classList.add("paused-animation");
       }
 
-      flowAnimationLayers.push(element);
+      flowPaths.push(path);
     });
 
     flowLayer.addLayer(flow);
   });
 }
 
-/* ============================================================
-   REDRAW LOADED FEATURES AFTER FILTER CHANGES
-============================================================ */
+/*
+  Use a batch draw rather than rebuilding the entire map
+  every time a small group of new features arrives.
+*/
 
-function redrawLoadedFeatures() {
+function addBatchToMap(features) {
+  features.forEach(addOneFeature);
+  updateAnalytics();
+}
+
+function redrawAll() {
   riverLayer.clearLayers();
   flowLayer.clearLayers();
-  flowAnimationLayers=[];
+  flowPaths=[];
 
-  visibleFeatures = getFilteredFeatures();
-  addFeaturesToMap(visibleFeatures);
+  visibleFeatures=allFeatures.filter(featurePassesFilter);
+
+  visibleFeatures.forEach(addOneFeature);
 
   updateAnalytics();
 }
 
-function getFilteredFeatures() {
-  const destination = $("destinationFilter").value;
-  const minArea = Number($("sizeFilter").value);
+/* =========================================================
+   PROCESS FEATURES AND PREVENT DUPLICATES
+========================================================= */
 
-  return allFeatures.filter(feature => {
-    const dest = feature.properties._destination || "unknown";
+function processFeatures(features) {
+  const fresh=[];
 
-    return (destination==="all" || destination===dest) &&
-      getUpstreamArea(feature)>=minArea;
-  });
+  for (const original of features) {
+    const feature=normalizeFeature(original);
+    if (!feature) continue;
+
+    const id=getObjectId(feature) ??
+      getRiverId(feature);
+
+    if (id===null || id===undefined) {
+      console.warn("Feature without a usable ID skipped.",feature);
+      continue;
+    }
+
+    const key=String(id);
+
+    if (loadedIds.has(key)) continue;
+
+    loadedIds.add(key);
+
+    feature.properties._destination=classifyDestination(feature);
+    allFeatures.push(feature);
+    fresh.push(feature);
+  }
+
+  if (fresh.length) {
+    addBatchToMap(fresh);
+  }
+
+  return fresh.length;
 }
 
-/* ============================================================
-   PROGRESSIVE DOWNLOAD ENGINE
-============================================================ */
+/* =========================================================
+   PROGRESSIVE LOADING: MAJOR RIVERS FIRST
+========================================================= */
 
 async function loadMajorRivers() {
-  setStatus("Loading major rivers");
-  setProgress(2,"Loading major rivers","Requesting major river reaches first…");
+  setStatus("Requesting major rivers");
+  setProgress(3,"Major rivers","Requesting major river reaches first…");
 
   let majorIds=[];
 
   try {
-    majorIds = await getObjectIds("UPLAND_SKM >= "+MAJOR_AREA_THRESHOLD);
+    majorIds=await getObjectIds("upland_skm >= "+MAJOR_AREA);
   } catch (error) {
-    console.warn("Major-river query failed; continuing with all river IDs.",error);
-  }
-
-  if (!majorIds.length) {
+    console.warn("Major river query failed:",error);
     return new Set();
   }
 
-  const majorSet = new Set(majorIds.map(String));
+  const majorSet=new Set(majorIds.map(String));
+
+  if (!majorIds.length) {
+    setProgress(8,"Preparing network","No major-river IDs returned. Continuing with full network…");
+    return majorSet;
+  }
+
   const batches=[];
 
   for (let i=0;i<majorIds.length;i+=BATCH_SIZE) {
     batches.push(majorIds.slice(i,i+BATCH_SIZE));
   }
 
-  let done=0;
+  // Display a small number of batches immediately.
+  const initialBatches=batches.slice(0,5);
 
-  // A small number of major-river batches are enough to give
-  // the map an initial useful network quickly.
-  for (const batch of batches.slice(0,4)) {
-    const features=await fetchBatch(batch);
-    processNewFeatures(features);
-    done++;
+  for (let i=0;i<initialBatches.length;i++) {
+    const features=await fetchFeatureBatch(initialBatches[i]);
+    processFeatures(features);
 
-    const progress=5+done/Math.max(1,Math.min(4,batches.length))*15;
-    setProgress(progress,"Loading major rivers",
-      numberFormat(allFeatures.length)+" major river reaches displayed");
+    const progress=5+((i+1)/initialBatches.length)*15;
 
-    setStatus("Major rivers displayed");
+    setProgress(
+      progress,
+      "Displaying major rivers",
+      fmt(allFeatures.length)+" major river reaches displayed"
+    );
+
+    setStatus("Major river network displayed","ready");
   }
 
   return majorSet;
 }
 
-function processNewFeatures(features) {
-  const fresh=[];
+/* =========================================================
+   PROGRESSIVE LOADING: COMPLETE NETWORK
+========================================================= */
 
-  for (const feature of features) {
-    if (!feature || !feature.geometry) continue;
-
-    const p=feature.properties || {};
-    feature.properties=p;
-
-    const id=String(getReachId(feature));
-
-    if (loadedIds.has(id)) continue;
-
-    loadedIds.add(id);
-    p._destination=classifyDestination(feature);
-
-    allFeatures.push(feature);
-    fresh.push(feature);
-  }
-
-  if (fresh.length) {
-    addFeaturesToMap(fresh);
-    updateAnalytics();
-  }
-
-  return fresh.length;
-}
-
-async function loadAllRemainingRivers(majorSet) {
-  setStatus("Finding remaining river reaches");
-  setProgress(22,"Finding all river reaches","Preparing the full African river network…");
+async function loadCompleteNetwork(majorSet) {
+  setStatus("Retrieving all river IDs");
+  setProgress(22,"Finding all river reaches","Requesting the complete African river feature list…");
 
   const allIds=await getObjectIds("1=1");
 
-  totalFeatureIds=allIds.length;
+  totalIds=allIds.length;
 
-  $("mapCount").textContent=numberFormat(totalFeatureIds)+" river IDs found";
+  if (!totalIds) {
+    throw new Error("The service returned zero river IDs for the selected extent.");
+  }
 
-  // Remove IDs already requested during the major-river phase.
-  const remaining=allIds.filter(id =>
-    !loadedIds.has(String(id)) &&
-    !(majorSet && majorSet.has(String(id)))
-  );
+  $("mapCount").textContent=fmt(totalIds)+" river IDs found";
 
-  // Include major IDs not yet downloaded in the normal queue.
-  const majorNotLoaded=allIds.filter(id =>
-    majorSet && majorSet.has(String(id)) && !loadedIds.has(String(id))
-  );
-
-  const queue=[...majorNotLoaded,...remaining];
+  // Already loaded major rivers are skipped.
+  const remaining=allIds.filter(id=>!loadedIds.has(String(id)));
 
   const batches=[];
-  for (let i=0;i<queue.length;i+=BATCH_SIZE) {
-    batches.push(queue.slice(i,i+BATCH_SIZE));
+
+  for (let i=0;i<remaining.length;i+=BATCH_SIZE) {
+    batches.push(remaining.slice(i,i+BATCH_SIZE));
   }
 
   if (!batches.length) {
-    loadingFinished=true;
-    setProgress(100,"Complete","All available river reaches have been processed.");
-    setStatus("River network loaded","ready");
+    finishLoading();
     return;
   }
 
-  let nextIndex=0;
+  let nextBatch=0;
   let completed=0;
-  let failedBatches=0;
 
   async function worker() {
     while (true) {
-      const index=nextIndex++;
+      const index=nextBatch++;
       if (index>=batches.length) return;
 
-      const batch=batches[index];
-
       try {
-        const features=await fetchBatch(batch);
-        const added=processNewFeatures(features);
-        downloadedFeatureCount+=added;
+        const features=await fetchFeatureBatch(batches[index]);
+        processFeatures(features);
       } catch (error) {
         failedBatches++;
-        console.warn("Batch "+(index+1)+" failed:",error);
+        console.error("River batch failed:",index,error);
       }
 
       completed++;
 
-      const fraction=completed/batches.length;
-      const progress=22+fraction*78;
+      const percent=22+(completed/batches.length)*78;
 
       setProgress(
-        progress,
+        percent,
         "Loading complete river network",
-        numberFormat(allFeatures.length)+" reaches displayed · "+
+        fmt(allFeatures.length)+" river reaches displayed · "+
         completed+" of "+batches.length+" batches processed"
       );
 
-      $("loadedCount").textContent=numberFormat(allFeatures.length)+" reaches loaded";
-      $("mapCount").textContent=
-        numberFormat(allFeatures.length)+" reaches displayed";
+      $("loadedCount").textContent=fmt(allFeatures.length)+" reaches loaded";
+      $("mapCount").textContent=fmt(allFeatures.length)+" / "+fmt(totalIds);
 
-      if (completed===1 || completed%2===0) {
+      if (completed%3===0 || completed===batches.length) {
         updateAnalytics();
       }
     }
@@ -1160,65 +1267,73 @@ async function loadAllRemainingRivers(majorSet) {
 
   const workers=Array.from(
     {length:Math.min(WORKER_COUNT,batches.length)},
-    () => worker()
+    ()=>worker()
   );
 
   await Promise.all(workers);
 
-  loadingFinished=true;
-  dataLoaded=true;
+  finishLoading();
+}
 
-  setProgress(100,"Complete",
-    numberFormat(allFeatures.length)+" river reaches loaded. "+
-    (failedBatches ? failedBatches+" batches could not be retrieved." : "All requested batches processed.")
+function finishLoading() {
+  loadingComplete=true;
+
+  setProgress(
+    100,
+    "Loading finished",
+    fmt(allFeatures.length)+" river reaches loaded. "+
+    (failedBatches
+      ? failedBatches+" batches could not be retrieved."
+      : "All requested river batches processed.")
   );
 
   setStatus(
-    failedBatches ? "Loaded with some missing batches" : "Complete river network loaded",
+    failedBatches
+      ? "Network loaded with some missing batches"
+      : "River network loaded",
     failedBatches ? "loading" : "ready"
   );
 
   updateAnalytics();
 }
 
-/* ============================================================
+/* =========================================================
    ANALYTICS
-============================================================ */
+========================================================= */
 
 function updateAnalytics() {
-  visibleFeatures=getFilteredFeatures();
+  visibleFeatures=allFeatures.filter(featurePassesFilter);
 
-  $("totalRivers").textContent=numberFormat(allFeatures.length);
-  $("visibleRivers").textContent=numberFormat(visibleFeatures.length);
+  $("totalRivers").textContent=fmt(allFeatures.length);
+  $("visibleRivers").textContent=fmt(visibleFeatures.length);
 
-  $("majorRivers").textContent=numberFormat(
-    allFeatures.filter(isMajorRiver).length
+  $("majorRivers").textContent=fmt(
+    allFeatures.filter(isMajor).length
   );
 
   const totalArea=allFeatures.reduce(
-    (sum,f)=>sum+getUpstreamArea(f),0
+    (sum,feature)=>sum+getUpstreamArea(feature),0
   );
 
-  $("totalArea").textContent=numberFormat(totalArea);
+  $("totalArea").textContent=fmt(totalArea);
 
-  $("loadedCount").textContent=numberFormat(allFeatures.length)+" reaches loaded";
+  $("loadedCount").textContent=fmt(allFeatures.length)+" reaches loaded";
 
   updateDestinationStats();
-
-  if (totalFeatureIds) {
-    $("mapCount").textContent=
-      numberFormat(allFeatures.length)+" / "+
-      numberFormat(totalFeatureIds)+" reaches";
-  }
 }
 
 function updateDestinationStats() {
   const counts={
-    atlantic:0,indian:0,med:0,redsea:0,inland:0,unknown:0
+    atlantic:0,
+    indian:0,
+    med:0,
+    redsea:0,
+    inland:0,
+    unknown:0
   };
 
-  visibleFeatures.forEach(f => {
-    const d=f.properties._destination || "unknown";
+  visibleFeatures.forEach(feature=>{
+    const d=feature.properties._destination || "unknown";
     counts[d]=(counts[d] || 0)+1;
   });
 
@@ -1232,70 +1347,80 @@ function updateDestinationStats() {
       return `
         <div class="destination-item">
           <span style="color:${d.color}">● ${d.label}</span>
-          <span>${numberFormat(count)} · ${pct}%</span>
-        </div>`;
+          <span>${fmt(count)} · ${pct}%</span>
+        </div>
+      `;
     }).join("");
 }
 
-/* ============================================================
+/* =========================================================
    SELECTED RIVER DETAILS
-============================================================ */
+========================================================= */
 
 function showRiverDetails(feature) {
   const p=feature.properties || {};
   const destination=DESTINATIONS[p._destination] || DESTINATIONS.unknown;
 
-  const name=getRiverName(feature);
-  const id=getReachId(feature);
+  const riverId=getRiverId(feature);
+  const objectId=getObjectId(feature);
   const area=getUpstreamArea(feature);
+  const catchment=getCatchmentArea(feature);
   const order=getStreamOrder(feature);
   const length=getLength(feature);
+  const discharge=numProp(p,["dis_av_cms"]);
 
   $("riverDetails").innerHTML=`
-    <strong style="color:#fff;font-size:13px">${escapeHTML(name)}</strong><br>
+    <strong style="color:#fff;font-size:13px">
+      ${escapeHTML(String(riverId))}
+    </strong><br>
     <span style="color:${destination.color}">${destination.label}</span>
     <br><br>
-    <strong>Reach ID:</strong> ${escapeHTML(String(id))}<br>
-    <strong>Upstream area:</strong> ${numberFormat(area)} km²<br>
-    <strong>Stream order:</strong> ${numberFormat(order)}<br>
-    <strong>Length:</strong> ${length ? numberFormat(length)+" km" : "Not available"}
+    <strong>HydroRIVERS ID:</strong> ${escapeHTML(String(riverId))}<br>
+    <strong>Object ID:</strong> ${escapeHTML(String(objectId))}<br>
+    <strong>Upstream area:</strong> ${fmt(area)} km²<br>
+    <strong>Catchment area:</strong> ${fmt(catchment)} km²<br>
+    <strong>Stream order:</strong> ${fmt(order)}<br>
+    <strong>Reach length:</strong> ${fmt(length)} km<br>
+    <strong>Mean discharge:</strong> ${fmt(discharge)} m³/s
   `;
 
-  const popup=L.popup().setContent(`
-    <strong>${escapeHTML(name)}</strong><br>
-    Destination: ${destination.label}<br>
-    Upstream area: ${numberFormat(area)} km²<br>
-    Stream order: ${numberFormat(order)}
-  `);
-
-  // Open popup near the clicked feature's centre.
   const bounds=L.geoJSON(feature).getBounds();
 
   if (bounds.isValid()) {
-    popup.setLatLng(bounds.getCenter()).openOn(map);
+    L.popup()
+      .setLatLng(bounds.getCenter())
+      .setContent(`
+        <strong>HydroRIVERS ID: ${escapeHTML(String(riverId))}</strong><br>
+        Destination: ${destination.label}<br>
+        Upstream area: ${fmt(area)} km²<br>
+        Stream order: ${fmt(order)}
+      `)
+      .openOn(map);
   }
 }
 
-/* ============================================================
-   FILTER EVENTS
-============================================================ */
+/* =========================================================
+   FILTER CONTROLS
+========================================================= */
 
-$("destinationFilter").addEventListener("change",redrawLoadedFeatures);
-$("sizeFilter").addEventListener("change",redrawLoadedFeatures);
+$("destinationFilter").addEventListener("change",redrawAll);
+$("sizeFilter").addEventListener("change",redrawAll);
 
 $("widthSlider").addEventListener("input",event=>{
   currentWidth=Number(event.target.value);
-  redrawLoadedFeatures();
+  redrawAll();
 });
 
-/* ============================================================
-   ANIMATION CONTROLS
-============================================================ */
+$("redrawBtn").addEventListener("click",redrawAll);
 
-function setAnimationPaused(paused) {
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+function setPaused(paused) {
   animationPaused=paused;
 
-  flowAnimationLayers.forEach(path=>{
+  flowPaths.forEach(path=>{
     if (path) {
       path.style.animationPlayState=paused ? "paused" : "running";
     }
@@ -1304,22 +1429,20 @@ function setAnimationPaused(paused) {
   $("pauseBtn").textContent=paused ? "Flow paused" : "Pause flow";
 }
 
-$("pauseBtn").addEventListener("click",()=>setAnimationPaused(true));
-$("resumeBtn").addEventListener("click",()=>setAnimationPaused(false));
+$("pauseBtn").addEventListener("click",()=>setPaused(true));
+$("resumeBtn").addEventListener("click",()=>setPaused(false));
 
 $("speedSlider").addEventListener("input",event=>{
   currentSpeed=Number(event.target.value);
 
-  flowAnimationLayers.forEach(path=>{
+  flowPaths.forEach(path=>{
     if (path) path.style.animationDuration=currentSpeed+"s";
   });
 });
 
-$("redrawBtn").addEventListener("click",redrawLoadedFeatures);
-
-/* ============================================================
-   MAP NAVIGATION
-============================================================ */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 $("africaBtn").addEventListener("click",()=>{
   map.fitBounds(africaBounds,{padding:[20,20]});
@@ -1329,9 +1452,9 @@ $("resetBtn").addEventListener("click",()=>{
   map.setView([2,20],3);
 });
 
-/* ============================================================
+/* =========================================================
    GEOJSON EXPORT
-============================================================ */
+========================================================= */
 
 $("exportBtn").addEventListener("click",()=>{
   if (!allFeatures.length) {
@@ -1363,43 +1486,43 @@ $("exportBtn").addEventListener("click",()=>{
   URL.revokeObjectURL(url);
 });
 
-/* ============================================================
-   START PROGRESSIVE LOADING
+/* =========================================================
+   START APPLICATION
+========================================================= */
 
-   Stage 1: map is already visible.
-   Stage 2: fetch and display major rivers.
-   Stage 3: retrieve all river IDs.
-   Stage 4: download remaining reaches in batches.
-============================================================ */
+async function startApplication() {
+  clearError();
 
-async function startLoading() {
   try {
-    setStatus("Loading major rivers");
-    setProgress(1,"Starting","Map displayed. Loading major river reaches first…");
+    setStatus("Connecting to HydroRIVERS");
+    setProgress(1,"Connecting","Map is ready. Connecting to HydroRIVERS…");
 
+    // First show major rivers.
     const majorSet=await loadMajorRivers();
 
-    setStatus("Major rivers displayed","ready");
-
-    await loadAllRemainingRivers(majorSet);
+    // Then retrieve all river reaches.
+    await loadCompleteNetwork(majorSet);
 
   } catch(error) {
-    console.error("River loading failed:",error);
+    console.error("HydroRIVERS loading error:",error);
 
-    setStatus("River data service error","error");
+    setStatus("River data loading failed","error");
 
     setProgress(
       0,
-      "Loading interrupted",
-      error.message+" Check the configured HydroRIVERS service."
+      "Loading failed",
+      "The river service could not complete the request."
     );
 
-    $("mapCount").textContent="Data service error";
+    showError(error.message);
+
+    $("mapCount").textContent="Unable to retrieve river data";
   }
 }
 
-startLoading();
+startApplication();
 
 </script>
 </body>
 </html>
+
