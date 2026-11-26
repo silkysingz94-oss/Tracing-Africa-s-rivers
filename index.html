@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day 26 | Every River Flows Somewhere — Africa</title>
+<title>Every River Flows Somewhere | Africa River Intelligence</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
@@ -22,11 +22,12 @@
   --med:#b58cff;
   --redsea:#f06c83;
   --inland:#8fd17d;
+  --unknown:#a9bac5;
 }
 
 * { box-sizing:border-box; }
 
-html, body {
+html,body {
   margin:0;
   width:100%;
   height:100%;
@@ -37,8 +38,8 @@ html, body {
 }
 
 header {
-  height:88px;
-  padding:13px 22px;
+  height:82px;
+  padding:12px 22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -46,11 +47,7 @@ header {
   background:#091b29;
 }
 
-.brand {
-  display:flex;
-  flex-direction:column;
-  gap:5px;
-}
+.brand { display:flex; flex-direction:column; gap:4px; }
 
 .eyebrow {
   color:var(--accent);
@@ -62,14 +59,11 @@ header {
 
 h1 {
   margin:0;
-  font-size:clamp(19px,2vw,28px);
+  font-size:clamp(19px,2vw,27px);
   letter-spacing:-.7px;
 }
 
-.subtitle {
-  color:var(--muted);
-  font-size:11px;
-}
+.subtitle { color:var(--muted); font-size:11px; }
 
 .header-right {
   text-align:right;
@@ -79,27 +73,27 @@ h1 {
 }
 
 .app {
-  height:calc(100vh - 88px);
+  height:calc(100vh - 82px);
   display:grid;
-  grid-template-columns:300px minmax(0,1fr) 310px;
-  gap:10px;
-  padding:10px;
+  grid-template-columns:285px minmax(0,1fr) 300px;
+  gap:9px;
+  padding:9px;
   min-height:0;
 }
 
 .panel {
   background:var(--panel);
   border:1px solid var(--line);
-  border-radius:10px;
-  min-height:0;
+  border-radius:9px;
   height:100%;
+  min-height:0;
   overflow-y:auto;
   overflow-x:hidden;
   scrollbar-width:thin;
   scrollbar-color:#36566d #0a1b28;
 }
 
-.panel-inner { padding:14px; }
+.panel-inner { padding:13px; }
 
 .panel h2 {
   font-size:13px;
@@ -109,34 +103,29 @@ h1 {
 }
 
 .section {
-  padding:13px 0;
+  padding:12px 0;
   border-top:1px solid var(--line);
 }
 
-.section:first-child {
-  border-top:0;
-  padding-top:0;
-}
+.section:first-child { border-top:0; padding-top:0; }
 
 .section-title {
-  font-size:11px;
+  font-size:10px;
   color:var(--accent);
   font-weight:800;
   text-transform:uppercase;
   letter-spacing:1px;
-  margin-bottom:10px;
+  margin-bottom:9px;
 }
 
 label {
   display:block;
   color:var(--muted);
   font-size:11px;
-  margin:10px 0 5px;
+  margin:9px 0 5px;
 }
 
-select, input[type="range"], button {
-  width:100%;
-}
+select,button { width:100%; }
 
 select {
   color:var(--text);
@@ -147,14 +136,14 @@ select {
   outline:none;
 }
 
-input[type="range"] { accent-color:var(--accent); }
+input[type="range"] { width:100%; accent-color:var(--accent); }
 
 button {
   background:#15364b;
   color:var(--text);
   border:1px solid #31566d;
   border-radius:6px;
-  padding:9px 10px;
+  padding:9px;
   cursor:pointer;
   font-size:11px;
   font-weight:700;
@@ -162,6 +151,7 @@ button {
 }
 
 button:hover { background:#20506a; }
+button:disabled { opacity:.4; cursor:not-allowed; }
 
 button.primary {
   background:#087c9f;
@@ -179,45 +169,26 @@ button.primary {
 .metric-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:7px;
 }
 
 .metric {
   background:var(--panel2);
   border:1px solid var(--line);
   border-radius:7px;
-  padding:10px;
+  padding:9px;
   min-width:0;
 }
 
 .metric strong {
   display:block;
-  font-size:19px;
+  font-size:18px;
   margin-bottom:4px;
   color:#fff;
   overflow-wrap:anywhere;
 }
 
-.metric span {
-  color:var(--muted);
-  font-size:10px;
-}
-
-.legend-row {
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin:9px 0;
-  font-size:11px;
-  color:#dce8ef;
-}
-
-.swatch {
-  width:23px;
-  height:4px;
-  border-radius:4px;
-  flex:none;
-}
+.metric span { color:var(--muted); font-size:10px; }
 
 .map-column {
   height:100%;
@@ -225,7 +196,7 @@ button.primary {
   display:flex;
   flex-direction:column;
   border:1px solid var(--line);
-  border-radius:10px;
+  border-radius:9px;
   overflow:hidden;
   background:#081a27;
 }
@@ -253,20 +224,17 @@ button.primary {
 
 .map-footer {
   min-height:34px;
-  padding:8px 12px;
+  padding:7px 12px;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:8px;
   border-top:1px solid var(--line);
   font-size:10px;
   color:var(--muted);
 }
 
-.status {
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
+.status { display:flex; align-items:center; gap:7px; }
 
 .status-dot {
   width:7px;
@@ -278,11 +246,39 @@ button.primary {
 .status-dot.ready { background:#62d58b; }
 .status-dot.error { background:#ed6574; }
 
-.small-note {
+.progress-wrap {
+  background:#071522;
+  height:6px;
+  width:100%;
+  border-radius:10px;
+  overflow:hidden;
+  margin:8px 0 5px;
+}
+
+.progress-bar {
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  border-radius:10px;
+  transition:width .2s ease;
+}
+
+.progress-text {
+  display:flex;
+  justify-content:space-between;
   color:var(--muted);
   font-size:10px;
-  line-height:1.6;
 }
+
+.legend-row {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin:9px 0;
+  font-size:11px;
+}
+
+.swatch { width:23px; height:4px; border-radius:4px; flex:none; }
 
 .destination-item {
   display:flex;
@@ -305,16 +301,19 @@ button.primary {
   line-height:1.7;
 }
 
+.small-note {
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.6;
+}
+
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
   background:#10283a;
   color:#e9f3f8;
 }
 
-.leaflet-popup-content {
-  font-size:12px;
-  line-height:1.6;
-}
+.leaflet-popup-content { font-size:12px; line-height:1.6; }
 
 .leaflet-control-layers {
   background:#10283a;
@@ -330,7 +329,7 @@ button.primary {
   border-color:#31566d !important;
 }
 
-/* SVG river-flow animation */
+/* Animated river overlay: SVG only */
 .river-flow-svg {
   fill:none;
   stroke:#ffffff;
@@ -351,33 +350,23 @@ button.primary {
 .paused-animation { animation-play-state:paused !important; }
 
 @media(max-width:1050px) {
-  .app {
-    grid-template-columns:260px minmax(0,1fr);
-  }
+  .app { grid-template-columns:250px minmax(0,1fr); }
   .right-panel { display:none; }
 }
 
 @media(max-width:700px) {
   html,body { overflow:auto; }
-  header { height:auto; min-height:82px; }
+  header { height:auto; min-height:80px; }
   .header-right { display:none; }
   .app {
     height:auto;
-    min-height:calc(100vh - 82px);
+    min-height:calc(100vh - 80px);
     display:flex;
     flex-direction:column;
     overflow:visible;
   }
-  .panel {
-    height:260px;
-    min-height:260px;
-    flex:none;
-  }
-  .map-column {
-    height:65vh;
-    min-height:500px;
-    flex:none;
-  }
+  .panel { height:250px; min-height:250px; flex:none; }
+  .map-column { height:65vh; min-height:500px; flex:none; }
   .right-panel { display:block; }
 }
 </style>
@@ -399,157 +388,172 @@ button.primary {
 
 <main class="app">
 
-  <!-- LEFT CONTROL PANEL -->
-  <aside class="panel">
-    <div class="panel-inner">
-      <h2>Map controls</h2>
+<!-- LEFT PANEL -->
+<aside class="panel">
+<div class="panel-inner">
 
-      <div class="section">
-        <div class="section-title">River network</div>
+  <h2>Map controls</h2>
 
-        <label for="destinationFilter">Destination</label>
-        <select id="destinationFilter">
-          <option value="all">Show every destination</option>
-          <option value="atlantic">Atlantic Ocean</option>
-          <option value="indian">Indian Ocean</option>
-          <option value="med">Mediterranean Sea</option>
-          <option value="redsea">Red Sea</option>
-          <option value="inland">Inland basin</option>
-          <option value="unknown">Unclassified / other</option>
-        </select>
+  <div class="section">
+    <div class="section-title">Loading progress</div>
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-text">
+      <span id="progressLabel">Preparing map</span>
+      <strong id="progressPercent">0%</strong>
+    </div>
+    <div class="small-note" id="loadingMessage">
+      The map is ready. River data will load progressively.
+    </div>
+  </div>
 
-        <label for="sizeFilter">Minimum upstream area</label>
-        <select id="sizeFilter">
-          <option value="0">All river reaches</option>
-          <option value="10">10 km² and above</option>
-          <option value="50">50 km² and above</option>
-          <option value="100">100 km² and above</option>
-          <option value="500">500 km² and above</option>
-          <option value="1000">1,000 km² and above</option>
-          <option value="5000">5,000 km² and above</option>
-        </select>
+  <div class="section">
+    <div class="section-title">River network</div>
 
-        <label for="widthSlider">River line thickness</label>
-        <input id="widthSlider" type="range" min="0.5" max="4" step="0.25" value="1.2">
+    <label for="destinationFilter">Destination</label>
+    <select id="destinationFilter">
+      <option value="all">Show every destination</option>
+      <option value="atlantic">Atlantic Ocean</option>
+      <option value="indian">Indian Ocean</option>
+      <option value="med">Mediterranean Sea</option>
+      <option value="redsea">Red Sea</option>
+      <option value="inland">Inland basin</option>
+      <option value="unknown">Unclassified / other</option>
+    </select>
 
-        <label for="speedSlider">Flow animation speed</label>
-        <input id="speedSlider" type="range" min="0.4" max="3" step="0.1" value="1.4">
-        <div class="small-note">Lower values are slower. Higher values are faster.</div>
+    <label for="sizeFilter">Minimum upstream area</label>
+    <select id="sizeFilter">
+      <option value="0">All river reaches</option>
+      <option value="10">10 km² and above</option>
+      <option value="50">50 km² and above</option>
+      <option value="100">100 km² and above</option>
+      <option value="500">500 km² and above</option>
+      <option value="1000">1,000 km² and above</option>
+      <option value="5000">5,000 km² and above</option>
+    </select>
+
+    <label for="widthSlider">River line thickness</label>
+    <input id="widthSlider" type="range" min="0.5" max="4" step="0.25" value="1.2">
+
+    <label for="speedSlider">Flow animation speed</label>
+    <input id="speedSlider" type="range" min="0.4" max="3" step="0.1" value="1.4">
+  </div>
+
+  <div class="section">
+    <div class="section-title">Animation</div>
+    <div class="button-grid">
+      <button id="pauseBtn">Pause flow</button>
+      <button id="resumeBtn">Resume flow</button>
+    </div>
+    <button id="redrawBtn" class="primary">Redraw river network</button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Navigation</div>
+    <div class="button-grid">
+      <button id="africaBtn">Zoom to Africa</button>
+      <button id="resetBtn">Reset view</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Export</div>
+    <button id="exportBtn">Export loaded rivers as GeoJSON</button>
+    <div class="small-note">
+      Export includes all river reaches downloaded so far, not just the visible filtered reaches.
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Data information</div>
+    <div class="small-note">
+      The map uses HydroRIVERS geometry. Major rivers are requested first. Smaller river reaches are
+      subsequently downloaded and added to the map in batches. The complete available network is
+      progressively built in the background.
+    </div>
+  </div>
+
+</div>
+</aside>
+
+<!-- CENTRAL MAP -->
+<section class="map-column">
+  <div class="map-topbar">
+    <span><strong>Africa river drainage network</strong></span>
+    <span id="mapCount">Map ready</span>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="map-footer">
+    <span class="status">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusText">Map ready · waiting for river data</span>
+    </span>
+    <span id="loadedCount">0 reaches loaded</span>
+  </div>
+</section>
+
+<!-- RIGHT PANEL -->
+<aside class="panel right-panel">
+<div class="panel-inner">
+
+  <h2>River intelligence</h2>
+
+  <div class="section">
+    <div class="section-title">Network overview</div>
+    <div class="metric-grid">
+      <div class="metric">
+        <strong id="totalRivers">0</strong>
+        <span>River reaches loaded</span>
       </div>
-
-      <div class="section">
-        <div class="section-title">Animation</div>
-        <div class="button-grid">
-          <button id="pauseBtn">Pause flow</button>
-          <button id="resumeBtn">Resume flow</button>
-        </div>
-        <button id="redrawBtn" class="primary">Redraw river network</button>
+      <div class="metric">
+        <strong id="visibleRivers">0</strong>
+        <span>Visible reaches</span>
       </div>
-
-      <div class="section">
-        <div class="section-title">Map navigation</div>
-        <div class="button-grid">
-          <button id="africaBtn">Zoom to Africa</button>
-          <button id="resetBtn">Reset view</button>
-        </div>
+      <div class="metric">
+        <strong id="majorRivers">0</strong>
+        <span>Major reaches loaded</span>
       </div>
-
-      <div class="section">
-        <div class="section-title">Export</div>
-        <button id="exportBtn">Export visible rivers as GeoJSON</button>
-        <div class="small-note">Exports the river reaches currently matching the selected filters.</div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">About the data</div>
-        <div class="small-note">
-          River geometry is requested from the HydroRIVERS ArcGIS service configured in this application.
-          The map draws all returned reaches within the African bounding area. The upstream-area selector
-          is an optional display filter; it is not applied to the initial network download.
-          Very small or ephemeral streams may not be represented in HydroRIVERS.
-        </div>
+      <div class="metric">
+        <strong id="totalArea">0</strong>
+        <span>Summed upstream area (km²)</span>
       </div>
     </div>
-  </aside>
+  </div>
 
-  <!-- FIXED CENTRAL MAP -->
-  <section class="map-column">
-    <div class="map-topbar">
-      <span><strong>Africa river drainage network</strong></span>
-      <span id="mapCount">Waiting for river data…</span>
+  <div class="section">
+    <div class="section-title">Where the rivers end</div>
+    <div class="legend-row"><span class="swatch" style="background:var(--atlantic)"></span>Atlantic Ocean</div>
+    <div class="legend-row"><span class="swatch" style="background:var(--indian)"></span>Indian Ocean</div>
+    <div class="legend-row"><span class="swatch" style="background:var(--med)"></span>Mediterranean Sea</div>
+    <div class="legend-row"><span class="swatch" style="background:var(--redsea)"></span>Red Sea</div>
+    <div class="legend-row"><span class="swatch" style="background:var(--inland)"></span>Inland drainage</div>
+    <div class="legend-row"><span class="swatch" style="background:var(--unknown)"></span>Unclassified / other</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Destination counts</div>
+    <div id="destinationStats" class="small-note">Waiting for river data…</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Selected river reach</div>
+    <div id="riverDetails">Select a river line on the map to inspect its attributes.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Map interpretation</div>
+    <div class="small-note">
+      Colours represent approximate drainage destination groups. White animated dashes highlight
+      selected major river reaches. The animation follows the geometry coordinate direction and does
+      not establish actual water velocity or downstream direction.
     </div>
+  </div>
 
-    <div id="map"></div>
-
-    <div class="map-footer">
-      <span class="status">
-        <span class="status-dot" id="statusDot"></span>
-        <span id="statusText">Connecting to river data</span>
-      </span>
-      <span>Click a river reach for details</span>
-    </div>
-  </section>
-
-  <!-- RIGHT ANALYTICS PANEL -->
-  <aside class="panel right-panel">
-    <div class="panel-inner">
-      <h2>River intelligence</h2>
-
-      <div class="section">
-        <div class="section-title">Network overview</div>
-        <div class="metric-grid">
-          <div class="metric">
-            <strong id="totalRivers">—</strong>
-            <span>River reaches loaded</span>
-          </div>
-          <div class="metric">
-            <strong id="visibleRivers">—</strong>
-            <span>Visible reaches</span>
-          </div>
-          <div class="metric">
-            <strong id="majorRivers">—</strong>
-            <span>Animated major reaches</span>
-          </div>
-          <div class="metric">
-            <strong id="totalArea">—</strong>
-            <span>Combined upstream area (km²)</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Where the rivers end</div>
-        <div class="legend-row"><span class="swatch" style="background:var(--atlantic)"></span>Atlantic Ocean</div>
-        <div class="legend-row"><span class="swatch" style="background:var(--indian)"></span>Indian Ocean</div>
-        <div class="legend-row"><span class="swatch" style="background:var(--med)"></span>Mediterranean Sea</div>
-        <div class="legend-row"><span class="swatch" style="background:var(--redsea)"></span>Red Sea</div>
-        <div class="legend-row"><span class="swatch" style="background:var(--inland)"></span>Inland drainage</div>
-        <div class="legend-row"><span class="swatch" style="background:#a9bac5"></span>Unclassified / other</div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Destination counts</div>
-        <div id="destinationStats">
-          <div class="small-note">Waiting for river data…</div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Selected river reach</div>
-        <div id="riverDetails">Select a river line on the map to inspect its attributes.</div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Reading the map</div>
-        <div class="small-note">
-          Each coloured line represents a river reach. The colour indicates its classified drainage
-          destination. White moving dashes highlight selected major river reaches. The animation follows
-          the coordinate direction of the returned geometry and is intended as a visual flow effect,
-          not a verified measurement of water velocity or downstream direction.
-        </div>
-      </div>
-    </div>
-  </aside>
+</div>
+</aside>
 
 </main>
 
@@ -557,7 +561,7 @@ button.primary {
 
 <script>
 /* ============================================================
-   CONFIGURATION
+   SETTINGS
 ============================================================ */
 
 const SERVICE_URL =
@@ -571,6 +575,10 @@ const AFRICA_BBOX = {
   spatialReference:{wkid:4326}
 };
 
+const BATCH_SIZE = 250;
+const WORKER_COUNT = 3;
+const MAJOR_AREA_THRESHOLD = 500;
+
 const DESTINATIONS = {
   atlantic:{label:"Atlantic Ocean",color:"#36b9e9"},
   indian:{label:"Indian Ocean",color:"#f1a64b"},
@@ -582,13 +590,25 @@ const DESTINATIONS = {
 
 let allFeatures = [];
 let visibleFeatures = [];
+let loadedIds = new Set();
 let flowAnimationLayers = [];
-let animationPaused = false;
+
 let currentSpeed = 1.4;
 let currentWidth = 1.2;
+let animationPaused = false;
 let dataLoaded = false;
+let loadingFinished = false;
+let totalFeatureIds = 0;
+let downloadedFeatureCount = 0;
 
-const map = L.map("map", {
+/* ============================================================
+   MAP INITIALIZATION
+
+   Map and basemap appear immediately. Data loading does not
+   block map creation.
+============================================================ */
+
+const map = L.map("map",{
   zoomControl:true,
   preferCanvas:true,
   worldCopyJump:true
@@ -599,6 +619,11 @@ map.getPane("flowPane").style.zIndex = 450;
 
 const canvasRenderer = L.canvas({padding:0.5});
 const svgRenderer = L.svg({pane:"flowPane",padding:0.5});
+
+const africaBounds = L.latLngBounds(
+  L.latLng(-36,-20),
+  L.latLng(38,55)
+);
 
 const baseMaps = {
   "Dark map":L.tileLayer(
@@ -620,21 +645,34 @@ const baseMaps = {
 };
 
 baseMaps["Dark map"].addTo(map);
-L.control.layers(baseMaps,null,{collapsed:true,position:"topright"}).addTo(map);
+L.control.layers(baseMaps,null,{collapsed:true}).addTo(map);
 
 const riverLayer = L.layerGroup().addTo(map);
 const flowLayer = L.layerGroup().addTo(map);
 
-const africaBounds = L.latLngBounds(
-  L.latLng(-36,-20),
-  L.latLng(38,55)
-);
+map.fitBounds(africaBounds,{padding:[15,15]});
 
 /* ============================================================
-   DOM HELPERS
+   HELPERS
 ============================================================ */
 
 const $ = id => document.getElementById(id);
+
+function numberFormat(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "—";
+  return n.toLocaleString("en-US",{maximumFractionDigits:1});
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g,char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  })[char]);
+}
 
 function setStatus(message,type="loading") {
   $("statusText").textContent = message;
@@ -642,109 +680,28 @@ function setStatus(message,type="loading") {
     (type==="ready" ? " ready" : type==="error" ? " error" : "");
 }
 
-function numberFormat(value) {
-  if (!Number.isFinite(Number(value))) return "—";
-  return Number(value).toLocaleString("en-US",{maximumFractionDigits:1});
+function setProgress(percent,label,message) {
+  const value = Math.max(0,Math.min(100,percent));
+  $("progressBar").style.width = value + "%";
+  $("progressPercent").textContent = Math.round(value) + "%";
+  $("progressLabel").textContent = label;
+  if (message) $("loadingMessage").textContent = message;
 }
 
-function getProperty(properties,names) {
+function getProperty(p,names) {
   for (const name of names) {
-    if (properties && properties[name] !== undefined && properties[name] !== null) {
-      return properties[name];
-    }
+    if (p && p[name] !== undefined && p[name] !== null) return p[name];
   }
   return null;
 }
 
-function numericProperty(properties,names) {
-  const value = getProperty(properties,names);
-  const n = Number(value);
+function numericProperty(p,names) {
+  const n = Number(getProperty(p,names));
   return Number.isFinite(n) ? n : 0;
 }
 
-/* ============================================================
-   DESTINATION CLASSIFICATION
-
-   This is a geographic approximation based on terminal reach
-   position and the available HydroRIVERS attributes. For
-   publication-grade basin classification, validate terminal
-   reaches against HydroBASINS / official basin outlet data.
-============================================================ */
-
-function classifyDestination(feature) {
-  const p = feature.properties || {};
-
-  const endorheic = getProperty(p,[
-    "ENDORHEIC","endorheic","ENDORHEIC_"
-  ]);
-
-  if (
-    endorheic === 1 ||
-    endorheic === "1" ||
-    String(endorheic).toLowerCase() === "yes" ||
-    String(endorheic).toLowerCase() === "true"
-  ) {
-    return "inland";
-  }
-
-  const geometry = feature.geometry;
-  if (!geometry) return "unknown";
-
-  const coords = geometry.type === "MultiLineString"
-    ? geometry.coordinates.flat()
-    : geometry.coordinates;
-
-  if (!coords || !coords.length) return "unknown";
-
-  const terminal = coords[coords.length-1];
-  const lon = Number(terminal[0]);
-  const lat = Number(terminal[1]);
-
-  if (!Number.isFinite(lon) || !Number.isFinite(lat)) return "unknown";
-
-  // Approximate northern African Mediterranean outlet belt.
-  if (lat >= 30 && lon >= -18 && lon <= 37) {
-    return "med";
-  }
-
-  // Approximate Red Sea drainage coast.
-  if (lon >= 32 && lon <= 44 && lat >= 10 && lat <= 31) {
-    return "redsea";
-  }
-
-  // Indian Ocean / Mozambique Channel / southern east coast.
-  if (lon >= 32 && lon <= 55 && lat <= 12) {
-    return "indian";
-  }
-
-  // Western and central Atlantic-facing coast.
-  if (lon <= 15 && lat >= -35 && lat <= 35) {
-    return "atlantic";
-  }
-
-  // Eastern coast north of the equator.
-  if (lon >= 40 && lat > 12) {
-    return "redsea";
-  }
-
-  // Southern and eastern African coast.
-  if (lon >= 32 && lat <= 12) {
-    return "indian";
-  }
-
-  return "unknown";
-}
-
-/* ============================================================
-   FEATURE ATTRIBUTE HELPERS
-============================================================ */
-
 function getUpstreamArea(feature) {
-  return numericProperty(feature.properties,{
-    0:"UPLAND_SKM",
-    1:"UPLAND_SKM",
-    2:"UPLAND_SKM"
-  });
+  return numericProperty(feature.properties,["UPLAND_SKM"]);
 }
 
 function getStreamOrder(feature) {
@@ -766,33 +723,62 @@ function getReachId(feature) {
 }
 
 function getLength(feature) {
-  return numericProperty(feature.properties,[
-    "LENGTH_KM","LENGTH","length_km"
-  ]);
+  return numericProperty(feature.properties,["LENGTH_KM","LENGTH"]);
 }
 
 function isMajorRiver(feature) {
-  return getUpstreamArea(feature) >= 500 || getStreamOrder(feature) >= 5;
+  return getUpstreamArea(feature)>=MAJOR_AREA_THRESHOLD ||
+         getStreamOrder(feature)>=5;
 }
 
 /* ============================================================
-   FETCH ALL FEATURE IDS AND DOWNLOAD IN BATCHES
+   APPROXIMATE DESTINATION CLASSIFICATION
+
+   For a definitive scientific classification, use verified
+   basin outlets and HydroBASINS connectivity.
 ============================================================ */
 
-async function fetchJSON(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error("HTTP " + response.status + " while requesting river data.");
-  }
-  const json = await response.json();
+function classifyDestination(feature) {
+  const p = feature.properties || {};
 
-  if (json.error) {
-    throw new Error(json.error.message || "The river service returned an error.");
-  }
-  return json;
+  const endorheic = getProperty(p,["ENDORHEIC"]);
+
+  if (
+    endorheic===1 || endorheic==="1" ||
+    String(endorheic).toLowerCase()==="yes" ||
+    String(endorheic).toLowerCase()==="true"
+  ) return "inland";
+
+  const geometry = feature.geometry;
+  if (!geometry) return "unknown";
+
+  const coords = geometry.type==="MultiLineString"
+    ? geometry.coordinates.flat()
+    : geometry.coordinates;
+
+  if (!coords || !coords.length) return "unknown";
+
+  const terminal = coords[coords.length-1];
+  const lon = Number(terminal[0]);
+  const lat = Number(terminal[1]);
+
+  if (!Number.isFinite(lon) || !Number.isFinite(lat)) return "unknown";
+
+  if (lat>=30 && lon>=-18 && lon<=37) return "med";
+  if (lon>=32 && lon<=44 && lat>=10 && lat<=31) return "redsea";
+  if (lon>=32 && lon<=55 && lat<=12) return "indian";
+  if (lon<=15 && lat>=-35 && lat<=35) return "atlantic";
+  if (lon>=40 && lat>12) return "redsea";
+  if (lon>=32 && lat<=12) return "indian";
+
+  return "unknown";
 }
 
-function buildQuery(params) {
+/* ============================================================
+   ARCGIS QUERY HELPERS
+============================================================ */
+
+function queryURL(params) {
   const url = new URL(SERVICE_URL);
   Object.entries(params).forEach(([key,value]) => {
     url.searchParams.set(key,value);
@@ -800,58 +786,55 @@ function buildQuery(params) {
   return url.toString();
 }
 
-async function getAllObjectIds() {
-  const url = buildQuery({
-    f:"json",
-    where:"1=1",
+async function requestJSON(url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Service returned HTTP " + response.status);
+  }
+
+  const result = await response.json();
+
+  if (result.error) {
+    throw new Error(result.error.message || "ArcGIS query error");
+  }
+
+  return result;
+}
+
+function baseSpatialParams() {
+  return {
     geometry:JSON.stringify(AFRICA_BBOX),
     geometryType:"esriGeometryEnvelope",
     inSR:"4326",
-    spatialRel:"esriSpatialRelIntersects",
-    returnIdsOnly:"true"
-  });
-
-  const result = await fetchJSON(url);
-  const ids = result.objectIds || [];
-
-  if (!ids.length) {
-    throw new Error("No river features were returned for the Africa extent.");
-  }
-  return ids;
+    spatialRel:"esriSpatialRelIntersects"
+  };
 }
 
-async function fetchFeatureBatch(ids) {
-  const url = buildQuery({
-    f:"geojson",
-    objectIds:ids.join(","),
-    outFields:"*",
-    returnGeometry:"true",
-    outSR:"4326"
-  });
+async function getObjectIds(where) {
+  const params = {
+    f:"json",
+    where:where,
+    returnIdsOnly:"true",
+    ...baseSpatialParams()
+  };
 
-  const result = await fetchJSON(url);
-
-  if (result.type === "FeatureCollection") {
-    return result.features || [];
-  }
-
-  // Some ArcGIS services return JSON geometry even when GeoJSON
-  // output is requested. Convert if the response is not GeoJSON.
-  if (result.features && result.features.length) {
-    return result.features.map(convertEsriFeature).filter(Boolean);
-  }
-
-  return [];
+  const result = await requestJSON(queryURL(params));
+  return result.objectIds || [];
 }
+
+/* ============================================================
+   CONVERT ARCGIS GEOMETRY IF NECESSARY
+============================================================ */
 
 function convertEsriFeature(feature) {
   const g = feature.geometry;
   if (!g) return null;
 
-  let geometry = null;
+  let geometry;
 
   if (g.paths) {
-    geometry = g.paths.length === 1
+    geometry = g.paths.length===1
       ? {type:"LineString",coordinates:g.paths[0]}
       : {type:"MultiLineString",coordinates:g.paths};
   } else {
@@ -861,182 +844,341 @@ function convertEsriFeature(feature) {
   return {
     type:"Feature",
     properties:feature.attributes || {},
-    geometry
+    geometry:geometry
   };
 }
 
-async function downloadAllRivers() {
-  setStatus("Retrieving river feature IDs");
+/* ============================================================
+   FETCH A BATCH
 
-  const ids = await getAllObjectIds();
+   GeoJSON is attempted first. If the service does not support
+   GeoJSON output, it falls back to standard ArcGIS JSON.
+============================================================ */
 
-  $("totalRivers").textContent = numberFormat(ids.length);
-  $("mapCount").textContent = numberFormat(ids.length) + " reaches identified";
+async function fetchBatch(ids) {
+  if (!ids.length) return [];
 
-  const batchSize = 400;
-  const batches = [];
+  const common = {
+    objectIds:ids.join(","),
+    outFields:"*",
+    returnGeometry:"true",
+    outSR:"4326"
+  };
 
-  for (let i=0;i<ids.length;i+=batchSize) {
-    batches.push(ids.slice(i,i+batchSize));
-  }
+  try {
+    const geo = await requestJSON(queryURL({
+      f:"geojson",
+      ...common
+    }));
 
-  const results = new Array(batches.length);
-  let nextBatch = 0;
-  let completed = 0;
-
-  async function worker() {
-    while (true) {
-      const index = nextBatch++;
-      if (index >= batches.length) return;
-
-      results[index] = await fetchFeatureBatch(batches[index]);
-      completed++;
-
-      const pct = Math.round(completed/batches.length*100);
-      setStatus("Downloading river reaches " + pct + "%");
-      $("mapCount").textContent =
-        numberFormat(ids.length) + " IDs · " + pct + "% downloaded";
+    if (geo.type==="FeatureCollection") {
+      return geo.features || [];
     }
+
+    if (geo.features) {
+      return geo.features.map(convertEsriFeature).filter(Boolean);
+    }
+  } catch (error) {
+    // Fall through to ArcGIS JSON format.
   }
 
-  const workers = Array.from(
-    {length:Math.min(3,batches.length)},
-    () => worker()
-  );
+  const arcgis = await requestJSON(queryURL({
+    f:"json",
+    ...common
+  }));
 
-  await Promise.all(workers);
-
-  allFeatures = results.flat().filter(f =>
-    f && f.geometry &&
-    (f.geometry.type==="LineString" || f.geometry.type==="MultiLineString")
-  );
-
-  allFeatures.forEach(f => {
-    f.properties = f.properties || {};
-    f.properties._destination = classifyDestination(f);
-  });
-
-  if (!allFeatures.length) {
-    throw new Error("The service returned no usable river geometries.");
-  }
-
-  dataLoaded = true;
-  setStatus("River network loaded","ready");
-
-  updateAnalytics();
-  drawRivers();
+  return (arcgis.features || [])
+    .map(convertEsriFeature)
+    .filter(Boolean);
 }
 
 /* ============================================================
-   FILTERING
+   ADD FEATURES TO THE MAP AS THEY ARRIVE
+
+   This is the key performance change: each batch is drawn
+   immediately instead of waiting for the complete dataset.
 ============================================================ */
+
+function addFeaturesToMap(features) {
+  if (!features.length) return;
+
+  const destinationFilter = $("destinationFilter").value;
+  const minArea = Number($("sizeFilter").value);
+
+  const width = currentWidth;
+
+  features.forEach(feature => {
+    const destination = feature.properties._destination || "unknown";
+    const style = DESTINATIONS[destination] || DESTINATIONS.unknown;
+
+    const shouldDisplay =
+      (destinationFilter==="all" || destinationFilter===destination) &&
+      getUpstreamArea(feature)>=minArea;
+
+    if (!shouldDisplay) return;
+
+    const base = L.geoJSON(feature,{
+      renderer:canvasRenderer,
+      style:{
+        color:style.color,
+        weight:width,
+        opacity:0.82,
+        lineCap:"round",
+        lineJoin:"round"
+      },
+      onEachFeature:(f,layer) => {
+        layer.on("click",() => showRiverDetails(f));
+      }
+    });
+
+    riverLayer.addLayer(base);
+
+    if (isMajorRiver(feature)) {
+      addAnimatedOverlay(feature);
+    }
+  });
+}
+
+function addAnimatedOverlay(feature) {
+  const geometry = feature.geometry;
+
+  const paths = geometry.type==="LineString"
+    ? [geometry.coordinates]
+    : geometry.coordinates;
+
+  paths.forEach(path => {
+    if (!path || path.length<2) return;
+
+    const latlngs = path.map(c => [c[1],c[0]]);
+
+    const flow = L.polyline(latlngs,{
+      renderer:svgRenderer,
+      pane:"flowPane",
+      color:"#ffffff",
+      weight:Math.max(1.3,currentWidth+0.6),
+      opacity:0.9,
+      dashArray:"2 18",
+      lineCap:"round",
+      interactive:false
+    });
+
+    flow.on("add",() => {
+      const element = flow.getElement();
+      if (!element) return;
+
+      element.classList.add("river-flow-svg");
+      element.style.animationDuration=currentSpeed+"s";
+
+      if (animationPaused) {
+        element.classList.add("paused-animation");
+      }
+
+      flowAnimationLayers.push(element);
+    });
+
+    flowLayer.addLayer(flow);
+  });
+}
+
+/* ============================================================
+   REDRAW LOADED FEATURES AFTER FILTER CHANGES
+============================================================ */
+
+function redrawLoadedFeatures() {
+  riverLayer.clearLayers();
+  flowLayer.clearLayers();
+  flowAnimationLayers=[];
+
+  visibleFeatures = getFilteredFeatures();
+  addFeaturesToMap(visibleFeatures);
+
+  updateAnalytics();
+}
 
 function getFilteredFeatures() {
   const destination = $("destinationFilter").value;
   const minArea = Number($("sizeFilter").value);
 
   return allFeatures.filter(feature => {
-    const p = feature.properties || {};
-    const dest = p._destination || "unknown";
-    const area = getUpstreamArea(feature);
+    const dest = feature.properties._destination || "unknown";
 
     return (destination==="all" || destination===dest) &&
-      area >= minArea;
+      getUpstreamArea(feature)>=minArea;
   });
 }
 
 /* ============================================================
-   DRAW RIVER NETWORK
-
-   All base reaches use Canvas for performance.
-   Major river reaches use a separate SVG renderer so that
-   CSS stroke-dash animation works reliably.
+   PROGRESSIVE DOWNLOAD ENGINE
 ============================================================ */
 
-function drawRivers() {
-  if (!dataLoaded) return;
+async function loadMajorRivers() {
+  setStatus("Loading major rivers");
+  setProgress(2,"Loading major rivers","Requesting major river reaches first…");
 
-  riverLayer.clearLayers();
-  flowLayer.clearLayers();
-  flowAnimationLayers = [];
+  let majorIds=[];
 
-  visibleFeatures = getFilteredFeatures();
+  try {
+    majorIds = await getObjectIds("UPLAND_SKM >= "+MAJOR_AREA_THRESHOLD);
+  } catch (error) {
+    console.warn("Major-river query failed; continuing with all river IDs.",error);
+  }
 
-  const width = currentWidth;
+  if (!majorIds.length) {
+    return new Set();
+  }
 
-  visibleFeatures.forEach(feature => {
-    const destination = feature.properties._destination || "unknown";
-    const style = DESTINATIONS[destination] || DESTINATIONS.unknown;
-    const coords = feature.geometry;
+  const majorSet = new Set(majorIds.map(String));
+  const batches=[];
 
-    const baseStyle = {
-      color:style.color,
-      weight:width,
-      opacity:0.82,
-      lineCap:"round",
-      lineJoin:"round",
-      renderer:canvasRenderer
-    };
+  for (let i=0;i<majorIds.length;i+=BATCH_SIZE) {
+    batches.push(majorIds.slice(i,i+BATCH_SIZE));
+  }
 
-    const baseLine = L.geoJSON(feature,{
-      style:baseStyle,
-      onEachFeature:(f,layer) => {
-        layer.on("click",() => showRiverDetails(f));
-      }
-    });
+  let done=0;
 
-    riverLayer.addLayer(baseLine);
+  // A small number of major-river batches are enough to give
+  // the map an initial useful network quickly.
+  for (const batch of batches.slice(0,4)) {
+    const features=await fetchBatch(batch);
+    processNewFeatures(features);
+    done++;
 
-    if (isMajorRiver(feature)) {
-      const paths = coords.type==="LineString"
-        ? [coords.coordinates]
-        : coords.coordinates;
+    const progress=5+done/Math.max(1,Math.min(4,batches.length))*15;
+    setProgress(progress,"Loading major rivers",
+      numberFormat(allFeatures.length)+" major river reaches displayed");
 
-      paths.forEach(pathCoords => {
-        if (!pathCoords || pathCoords.length<2) return;
+    setStatus("Major rivers displayed");
+  }
 
-        const latlngs = pathCoords.map(c => [c[1],c[0]]);
+  return majorSet;
+}
 
-        const flow = L.polyline(latlngs,{
-          renderer:svgRenderer,
-          pane:"flowPane",
-          color:"#ffffff",
-          weight:Math.max(1.2,width+0.6),
-          opacity:0.9,
-          dashArray:"2 18",
-          lineCap:"round",
-          interactive:false
-        });
+function processNewFeatures(features) {
+  const fresh=[];
 
-        flow.on("add",() => {
-          const element = flow.getElement();
-          if (!element) return;
+  for (const feature of features) {
+    if (!feature || !feature.geometry) continue;
 
-          element.classList.add("river-flow-svg");
-          element.style.animationDuration = currentSpeed + "s";
+    const p=feature.properties || {};
+    feature.properties=p;
 
-          if (animationPaused) {
-            element.classList.add("paused-animation");
-          }
+    const id=String(getReachId(feature));
 
-          flowAnimationLayers.push(element);
-        });
+    if (loadedIds.has(id)) continue;
 
-        flowLayer.addLayer(flow);
-      });
-    }
-  });
+    loadedIds.add(id);
+    p._destination=classifyDestination(feature);
 
-  $("visibleRivers").textContent = numberFormat(visibleFeatures.length);
-  $("majorRivers").textContent = numberFormat(
-    visibleFeatures.filter(isMajorRiver).length
+    allFeatures.push(feature);
+    fresh.push(feature);
+  }
+
+  if (fresh.length) {
+    addFeaturesToMap(fresh);
+    updateAnalytics();
+  }
+
+  return fresh.length;
+}
+
+async function loadAllRemainingRivers(majorSet) {
+  setStatus("Finding remaining river reaches");
+  setProgress(22,"Finding all river reaches","Preparing the full African river network…");
+
+  const allIds=await getObjectIds("1=1");
+
+  totalFeatureIds=allIds.length;
+
+  $("mapCount").textContent=numberFormat(totalFeatureIds)+" river IDs found";
+
+  // Remove IDs already requested during the major-river phase.
+  const remaining=allIds.filter(id =>
+    !loadedIds.has(String(id)) &&
+    !(majorSet && majorSet.has(String(id)))
   );
 
-  $("mapCount").textContent =
-    numberFormat(visibleFeatures.length) + " of " +
-    numberFormat(allFeatures.length) + " reaches visible";
+  // Include major IDs not yet downloaded in the normal queue.
+  const majorNotLoaded=allIds.filter(id =>
+    majorSet && majorSet.has(String(id)) && !loadedIds.has(String(id))
+  );
 
-  updateDestinationStats();
+  const queue=[...majorNotLoaded,...remaining];
+
+  const batches=[];
+  for (let i=0;i<queue.length;i+=BATCH_SIZE) {
+    batches.push(queue.slice(i,i+BATCH_SIZE));
+  }
+
+  if (!batches.length) {
+    loadingFinished=true;
+    setProgress(100,"Complete","All available river reaches have been processed.");
+    setStatus("River network loaded","ready");
+    return;
+  }
+
+  let nextIndex=0;
+  let completed=0;
+  let failedBatches=0;
+
+  async function worker() {
+    while (true) {
+      const index=nextIndex++;
+      if (index>=batches.length) return;
+
+      const batch=batches[index];
+
+      try {
+        const features=await fetchBatch(batch);
+        const added=processNewFeatures(features);
+        downloadedFeatureCount+=added;
+      } catch (error) {
+        failedBatches++;
+        console.warn("Batch "+(index+1)+" failed:",error);
+      }
+
+      completed++;
+
+      const fraction=completed/batches.length;
+      const progress=22+fraction*78;
+
+      setProgress(
+        progress,
+        "Loading complete river network",
+        numberFormat(allFeatures.length)+" reaches displayed · "+
+        completed+" of "+batches.length+" batches processed"
+      );
+
+      $("loadedCount").textContent=numberFormat(allFeatures.length)+" reaches loaded";
+      $("mapCount").textContent=
+        numberFormat(allFeatures.length)+" reaches displayed";
+
+      if (completed===1 || completed%2===0) {
+        updateAnalytics();
+      }
+    }
+  }
+
+  const workers=Array.from(
+    {length:Math.min(WORKER_COUNT,batches.length)},
+    () => worker()
+  );
+
+  await Promise.all(workers);
+
+  loadingFinished=true;
+  dataLoaded=true;
+
+  setProgress(100,"Complete",
+    numberFormat(allFeatures.length)+" river reaches loaded. "+
+    (failedBatches ? failedBatches+" batches could not be retrieved." : "All requested batches processed.")
+  );
+
+  setStatus(
+    failedBatches ? "Loaded with some missing batches" : "Complete river network loaded",
+    failedBatches ? "loading" : "ready"
+  );
+
+  updateAnalytics();
 }
 
 /* ============================================================
@@ -1044,67 +1186,72 @@ function drawRivers() {
 ============================================================ */
 
 function updateAnalytics() {
-  $("totalRivers").textContent = numberFormat(allFeatures.length);
+  visibleFeatures=getFilteredFeatures();
 
-  const totalArea = allFeatures.reduce(
-    (sum,f) => sum + getUpstreamArea(f),0
+  $("totalRivers").textContent=numberFormat(allFeatures.length);
+  $("visibleRivers").textContent=numberFormat(visibleFeatures.length);
+
+  $("majorRivers").textContent=numberFormat(
+    allFeatures.filter(isMajorRiver).length
   );
 
-  $("totalArea").textContent = numberFormat(totalArea);
+  const totalArea=allFeatures.reduce(
+    (sum,f)=>sum+getUpstreamArea(f),0
+  );
 
-  const majors = allFeatures.filter(isMajorRiver).length;
-  $("majorRivers").textContent = numberFormat(majors);
+  $("totalArea").textContent=numberFormat(totalArea);
+
+  $("loadedCount").textContent=numberFormat(allFeatures.length)+" reaches loaded";
 
   updateDestinationStats();
+
+  if (totalFeatureIds) {
+    $("mapCount").textContent=
+      numberFormat(allFeatures.length)+" / "+
+      numberFormat(totalFeatureIds)+" reaches";
+  }
 }
 
 function updateDestinationStats() {
-  const counts = {
-    atlantic:0,
-    indian:0,
-    med:0,
-    redsea:0,
-    inland:0,
-    unknown:0
+  const counts={
+    atlantic:0,indian:0,med:0,redsea:0,inland:0,unknown:0
   };
 
   visibleFeatures.forEach(f => {
-    const dest = f.properties._destination || "unknown";
-    counts[dest] = (counts[dest] || 0) + 1;
+    const d=f.properties._destination || "unknown";
+    counts[d]=(counts[d] || 0)+1;
   });
 
-  const total = visibleFeatures.length || 1;
+  const total=visibleFeatures.length || 1;
 
-  $("destinationStats").innerHTML =
-    Object.entries(DESTINATIONS).map(([key,d]) => {
-      const count = counts[key] || 0;
-      const pct = (count/total*100).toFixed(1);
+  $("destinationStats").innerHTML=
+    Object.entries(DESTINATIONS).map(([key,d])=>{
+      const count=counts[key] || 0;
+      const pct=(count/total*100).toFixed(1);
 
       return `
         <div class="destination-item">
           <span style="color:${d.color}">● ${d.label}</span>
           <span>${numberFormat(count)} · ${pct}%</span>
-        </div>
-      `;
+        </div>`;
     }).join("");
 }
 
 /* ============================================================
-   RIVER POPUP / DETAIL PANEL
+   SELECTED RIVER DETAILS
 ============================================================ */
 
 function showRiverDetails(feature) {
-  const p = feature.properties || {};
-  const dest = p._destination || "unknown";
-  const destination = DESTINATIONS[dest] || DESTINATIONS.unknown;
+  const p=feature.properties || {};
+  const destination=DESTINATIONS[p._destination] || DESTINATIONS.unknown;
 
-  const name = getRiverName(feature);
-  const id = getReachId(feature);
-  const area = getUpstreamArea(feature);
-  const order = getStreamOrder(feature);
-  const length = getLength(feature);
+  const name=getRiverName(feature);
+  const id=getReachId(feature);
+  const area=getUpstreamArea(feature);
+  const order=getStreamOrder(feature);
+  const length=getLength(feature);
 
-  $("riverDetails").innerHTML = `
+  $("riverDetails").innerHTML=`
     <strong style="color:#fff;font-size:13px">${escapeHTML(name)}</strong><br>
     <span style="color:${destination.color}">${destination.label}</span>
     <br><br>
@@ -1114,81 +1261,71 @@ function showRiverDetails(feature) {
     <strong>Length:</strong> ${length ? numberFormat(length)+" km" : "Not available"}
   `;
 
-  L.popup()
-    .setLatLng(map.getCenter())
-    .setContent(`
-      <strong>${escapeHTML(name)}</strong><br>
-      Destination: ${destination.label}<br>
-      Upstream area: ${numberFormat(area)} km²<br>
-      Stream order: ${numberFormat(order)}
-    `)
-    .openOn(map);
+  const popup=L.popup().setContent(`
+    <strong>${escapeHTML(name)}</strong><br>
+    Destination: ${destination.label}<br>
+    Upstream area: ${numberFormat(area)} km²<br>
+    Stream order: ${numberFormat(order)}
+  `);
+
+  // Open popup near the clicked feature's centre.
+  const bounds=L.geoJSON(feature).getBounds();
+
+  if (bounds.isValid()) {
+    popup.setLatLng(bounds.getCenter()).openOn(map);
+  }
 }
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g,char => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-  })[char]);
-}
+/* ============================================================
+   FILTER EVENTS
+============================================================ */
+
+$("destinationFilter").addEventListener("change",redrawLoadedFeatures);
+$("sizeFilter").addEventListener("change",redrawLoadedFeatures);
+
+$("widthSlider").addEventListener("input",event=>{
+  currentWidth=Number(event.target.value);
+  redrawLoadedFeatures();
+});
 
 /* ============================================================
    ANIMATION CONTROLS
 ============================================================ */
 
 function setAnimationPaused(paused) {
-  animationPaused = paused;
+  animationPaused=paused;
 
-  flowAnimationLayers.forEach(path => {
-    if (!path) return;
-    path.style.animationPlayState = paused ? "paused" : "running";
+  flowAnimationLayers.forEach(path=>{
+    if (path) {
+      path.style.animationPlayState=paused ? "paused" : "running";
+    }
   });
 
-  $("pauseBtn").textContent = paused ? "Flow paused" : "Pause flow";
+  $("pauseBtn").textContent=paused ? "Flow paused" : "Pause flow";
 }
 
-$("pauseBtn").addEventListener("click",() => {
-  setAnimationPaused(true);
-});
+$("pauseBtn").addEventListener("click",()=>setAnimationPaused(true));
+$("resumeBtn").addEventListener("click",()=>setAnimationPaused(false));
 
-$("resumeBtn").addEventListener("click",() => {
-  setAnimationPaused(false);
-});
+$("speedSlider").addEventListener("input",event=>{
+  currentSpeed=Number(event.target.value);
 
-$("speedSlider").addEventListener("input",event => {
-  currentSpeed = Number(event.target.value);
-
-  flowAnimationLayers.forEach(path => {
-    if (path) path.style.animationDuration = currentSpeed + "s";
+  flowAnimationLayers.forEach(path=>{
+    if (path) path.style.animationDuration=currentSpeed+"s";
   });
 });
 
-$("widthSlider").addEventListener("input",event => {
-  currentWidth = Number(event.target.value);
-  drawRivers();
-});
-
-$("redrawBtn").addEventListener("click",drawRivers);
-
-/* ============================================================
-   FILTER EVENTS
-============================================================ */
-
-$("destinationFilter").addEventListener("change",drawRivers);
-$("sizeFilter").addEventListener("change",drawRivers);
+$("redrawBtn").addEventListener("click",redrawLoadedFeatures);
 
 /* ============================================================
    MAP NAVIGATION
 ============================================================ */
 
-$("africaBtn").addEventListener("click",() => {
+$("africaBtn").addEventListener("click",()=>{
   map.fitBounds(africaBounds,{padding:[20,20]});
 });
 
-$("resetBtn").addEventListener("click",() => {
+$("resetBtn").addEventListener("click",()=>{
   map.setView([2,20],3);
 });
 
@@ -1196,28 +1333,29 @@ $("resetBtn").addEventListener("click",() => {
    GEOJSON EXPORT
 ============================================================ */
 
-$("exportBtn").addEventListener("click",() => {
-  if (!visibleFeatures.length) {
-    alert("There are no visible river reaches to export.");
+$("exportBtn").addEventListener("click",()=>{
+  if (!allFeatures.length) {
+    alert("No river features have been loaded yet.");
     return;
   }
 
-  const output = {
+  const output={
     type:"FeatureCollection",
     name:"Africa_River_Destinations",
-    features:visibleFeatures
+    features:allFeatures
   };
 
-  const blob = new Blob(
+  const blob=new Blob(
     [JSON.stringify(output,null,2)],
     {type:"application/geo+json"}
   );
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
 
-  link.href = url;
-  link.download = "Africa_River_Destinations.geojson";
+  link.href=url;
+  link.download="Africa_River_Destinations.geojson";
+
   document.body.appendChild(link);
   link.click();
   link.remove();
@@ -1226,20 +1364,42 @@ $("exportBtn").addEventListener("click",() => {
 });
 
 /* ============================================================
-   INITIAL LOAD
+   START PROGRESSIVE LOADING
+
+   Stage 1: map is already visible.
+   Stage 2: fetch and display major rivers.
+   Stage 3: retrieve all river IDs.
+   Stage 4: download remaining reaches in batches.
 ============================================================ */
 
-map.fitBounds(africaBounds,{padding:[15,15]});
+async function startLoading() {
+  try {
+    setStatus("Loading major rivers");
+    setProgress(1,"Starting","Map displayed. Loading major river reaches first…");
 
-downloadAllRivers().catch(error => {
-  console.error("River network loading error:",error);
-  setStatus("River data could not be loaded","error");
-  $("mapCount").textContent = "Data service error";
-  $("destinationStats").innerHTML =
-    `<div class="small-note">${escapeHTML(error.message)}<br><br>
-    Check the HydroRIVERS service URL, layer availability, and CORS access.</div>`;
-});
+    const majorSet=await loadMajorRivers();
+
+    setStatus("Major rivers displayed","ready");
+
+    await loadAllRemainingRivers(majorSet);
+
+  } catch(error) {
+    console.error("River loading failed:",error);
+
+    setStatus("River data service error","error");
+
+    setProgress(
+      0,
+      "Loading interrupted",
+      error.message+" Check the configured HydroRIVERS service."
+    );
+
+    $("mapCount").textContent="Data service error";
+  }
+}
+
+startLoading();
+
 </script>
-
 </body>
 </html>
