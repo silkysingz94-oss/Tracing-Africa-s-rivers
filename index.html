@@ -630,7 +630,870 @@ const africaBounds = L.latLngBounds(
 
 const baseMaps = {
   "Dark map":L.tileLayer(
-    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GAMBIA | ECMWF WEATHER & FIRE INTELLIGENCE</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+<style>
+:root{
+ --bg:#0a1420;--panel:#111f2e;--panel2:#17293a;
+ --border:#263b4d;--text:#e6edf4;--muted:#91a5b7;
+ --cyan:#21c5d8;--blue:#3189e8;--green:#36c98c;
+ --yellow:#e9c34d;--orange:#f28b35;--red:#ed4d4d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{
+ padding:20px 24px;
+ background:linear-gradient(110deg,#102b43,#075a72,#123d48);
+ border-bottom:3px solid var(--cyan)
+}
+.headerline{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+h1{font-size:23px;margin:0 0 8px}
+header p{font-size:11px;color:#b9d7e5;letter-spacing:1.1px;margin:0}
+.tag{font-size:10px;padding:7px 11px;border:1px solid #ffffff40;border-radius:5px}
+.status{color:#7df0bc}
+main{
+ display:grid;
+ grid-template-columns:285px minmax(350px,1fr) 315px;
+ gap:11px;padding:11px;
+ height:calc(100vh - 105px);min-height:650px
+}
+.panel{
+ background:var(--panel);border:1px solid var(--border);
+ border-radius:8px;overflow-y:auto;min-height:0;
+ scrollbar-width:thin;scrollbar-color:#496477 transparent
+}
+.panel::-webkit-scrollbar{width:5px}
+.panel::-webkit-scrollbar-thumb{background:#496477}
+.section{padding:14px;border-bottom:1px solid var(--border)}
+.section h3{font-size:12px;color:#a7dce8;margin:0 0 13px}
+label{display:block;font-size:10px;color:var(--muted);margin:11px 0 5px}
+select,input{
+ width:100%;background:#0b1927;color:var(--text);
+ border:1px solid #30475a;border-radius:5px;
+ padding:9px;font-size:11px
+}
+button{
+ background:#087eaa;color:white;border:0;border-radius:5px;
+ padding:10px 12px;font-size:10px;font-weight:bold;cursor:pointer
+}
+button:hover{filter:brightness(1.2)}
+button.secondary{background:#273d50}
+.actions{display:flex;gap:6px;margin-top:9px}
+.actions button{flex:1}
+.small{font-size:10px;color:var(--muted);line-height:1.6}
+#mapPanel{position:relative;overflow:hidden}
+#map{height:100%;width:100%;background:#142c39}
+.map-title{
+ position:absolute;z-index:500;top:12px;left:55px;
+ padding:10px 13px;background:#102131ee;border:1px solid #365165;
+ border-radius:6px;font-size:11px;font-weight:bold
+}
+.legend{
+ position:absolute;z-index:500;bottom:20px;left:12px;
+ background:#102131ed;border:1px solid #365165;
+ padding:12px;border-radius:6px;font-size:10px;line-height:2
+}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kpi{background:var(--panel2);padding:11px;border-radius:6px}
+.kpi span{font-size:9px;color:var(--muted)}
+.kpi strong{font-size:21px;display:block;margin:7px 0 3px}
+.kpi em{font-size:9px;color:var(--muted);font-style:normal}
+.chart{height:190px;position:relative}
+.chart.large{height:230px}
+.metric{display:flex;justify-content:space-between;gap:8px;
+ padding:9px 0;border-bottom:1px solid var(--border);font-size:10px}
+.metric span{color:var(--muted)}
+.metric strong{text-align:right}
+.badge{
+ display:inline-block;padding:5px 8px;border-radius:4px;
+ font-size:10px;font-weight:bold
+}
+.notice{
+ background:#342b1c;border-left:3px solid var(--orange);
+ padding:11px;font-size:10px;line-height:1.6;color:#e9d9b4
+}
+#loading{
+ position:absolute;inset:0;z-index:1000;background:#0b1825ed;
+ display:flex;align-items:center;justify-content:center;
+ font-size:12px;text-align:center;padding:20px
+}
+table{width:100%;border-collapse:collapse;font-size:10px}
+td,th{padding:8px 5px;border-bottom:1px solid var(--border);text-align:right}
+td:first-child,th:first-child{text-align:left}
+th{color:#a7dce8}
+footer{text-align:center;color:var(--muted);padding:15px;font-size:10px}
+@media(max-width:1050px){
+ main{height:auto;grid-template-columns:1fr}
+ .panel{max-height:650px}
+ #mapPanel{height:570px;order:-1}
+}
+@media(max-width:600px){
+ h1{font-size:17px}
+ #mapPanel{height:440px}
+ main{padding:6px;gap:7px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="headerline">
+<div>
+<h1>🇬🇲 GAMBIA | WEATHER & FIRE INTELLIGENCE</h1>
+<p>ECMWF OPEN FORECAST DATA • FIRE WEATHER SCREENING • ENVIRONMENTAL INTELLIGENCE</p>
+</div>
+<div class="tag status" id="status">INITIALISING FORECAST SYSTEM</div>
+</div>
+<div class="headerline" style="margin-top:15px">
+<span class="tag">ECMWF FORECAST</span>
+<span class="tag">7-DAY FORECAST</span>
+<span class="tag">12 MONITORING LOCATIONS</span>
+<span class="tag">LIVE API CONNECTION</span>
+</div>
+</header>
+
+<main>
+
+<!-- LEFT CONTROL PANEL -->
+<aside class="panel">
+
+<div class="section">
+<h3>01 | FORECAST CONTROLS</h3>
+
+<label>Monitoring location</label>
+<select id="location"></select>
+
+<label>Forecast day</label>
+<select id="day">
+<option value="0">Day 1</option>
+<option value="1">Day 2</option>
+<option value="2">Day 3</option>
+<option value="3">Day 4</option>
+<option value="4">Day 5</option>
+<option value="5">Day 6</option>
+<option value="6">Day 7</option>
+</select>
+
+<label>Forecast hour</label>
+<input id="hour" type="range" min="0" max="23" value="12">
+<div class="small" id="hourLabel">12:00 GMT</div>
+
+<div class="actions">
+<button onclick="refreshData()">Refresh forecast</button>
+<button class="secondary" onclick="resetView()">Reset map</button>
+</div>
+
+<p class="small" id="updated">Waiting for forecast data...</p>
+</div>
+
+<div class="section">
+<h3>02 | MAP LAYERS</h3>
+<label>Weather intelligence layer</label>
+<select id="layer">
+<option value="risk">Fire-weather screening index</option>
+<option value="temperature">Temperature</option>
+<option value="humidity">Relative humidity</option>
+<option value="rain">Precipitation</option>
+<option value="wind">Wind speed</option>
+<option value="gust">Wind gusts</option>
+</select>
+
+<label>Basemap</label>
+<select id="basemap">
+<option value="dark">Carto Dark</option>
+<option value="light">Carto Light</option>
+<option value="osm">OpenStreetMap</option>
+<option value="satellite">Esri Satellite</option>
+</select>
+</div>
+
+<div class="section">
+<h3>03 | FIRE WEATHER SCREENING</h3>
+<label>Temperature sensitivity (°C)</label>
+<input id="tempThreshold" type="number" value="35" min="20" max="50">
+
+<label>Critical humidity threshold (%)</label>
+<input id="humidityThreshold" type="number" value="30" min="5" max="70">
+
+<label>Wind sensitivity (m/s)</label>
+<input id="windThreshold" type="number" value="10" min="2" max="25">
+
+<label>Dryness period (hours)</label>
+<select id="dryPeriod">
+<option value="24">24 hours</option>
+<option value="48">48 hours</option>
+<option value="72">72 hours</option>
+</select>
+
+<button onclick="recalculate()">Update screening model</button>
+
+<p class="small">These are adjustable screening thresholds, not calibrated fire-probability parameters.</p>
+</div>
+
+<div class="section">
+<h3>04 | FORECAST DATA</h3>
+<div class="metric"><span>Weather model</span><strong>ECMWF IFS</strong></div>
+<div class="metric"><span>Forecast horizon</span><strong>7 days</strong></div>
+<div class="metric"><span>Spatial sampling</span><strong>12 locations</strong></div>
+<div class="metric"><span>Time zone</span><strong>Africa/Banjul</strong></div>
+<div class="metric"><span>Weather source</span><strong>ECMWF API</strong></div>
+</div>
+
+<div class="section">
+<h3>05 | DOWNLOAD</h3>
+<button onclick="exportCSV()" style="width:100%">Export forecast CSV</button>
+<button onclick="exportGeoJSON()" class="secondary" style="width:100%">Export monitoring locations GeoJSON</button>
+</div>
+
+</aside>
+
+<!-- MAP -->
+<section id="mapPanel" class="panel">
+<div class="map-title">GAMBIA | SPATIAL WEATHER MONITORING</div>
+<div id="map"></div>
+<div class="legend">
+<b>SCREENING INDEX</b><br>
+<span class="dot" style="background:#32c98a"></span>Low (0–24)<br>
+<span class="dot" style="background:#e5c64c"></span>Moderate (25–44)<br>
+<span class="dot" style="background:#ef963b"></span>High (45–64)<br>
+<span class="dot" style="background:#ec514c"></span>Very high (65–79)<br>
+<span class="dot" style="background:#a93cce"></span>Extreme (80–100)
+</div>
+<div id="loading">Connecting to ECMWF forecast data...</div>
+</section>
+
+<!-- RIGHT ANALYTICS -->
+<aside class="panel">
+
+<div class="section">
+<h3>06 | CURRENT FORECAST CONDITIONS</h3>
+<div class="kpis">
+<div class="kpi"><span>TEMPERATURE</span><strong id="temp">—</strong><em>°C</em></div>
+<div class="kpi"><span>RELATIVE HUMIDITY</span><strong id="humidity">—</strong><em>%</em></div>
+<div class="kpi"><span>WIND SPEED</span><strong id="wind">—</strong><em>m/s</em></div>
+<div class="kpi"><span>PRECIPITATION</span><strong id="rain">—</strong><em>mm/hour</em></div>
+</div>
+</div>
+
+<div class="section">
+<h3>07 | FIRE WEATHER SCREENING</h3>
+<div class="kpis">
+<div class="kpi">
+<span>SCREENING INDEX</span>
+<strong id="risk">—</strong>
+<em>0–100 index</em>
+</div>
+<div class="kpi">
+<span>SCREENING CATEGORY</span>
+<strong id="category" style="font-size:15px">—</strong>
+<em id="categoryNote">Weather conditions</em>
+</div>
+</div>
+<div style="margin-top:12px">
+<div class="metric"><span>Maximum wind gust</span><strong id="gust">—</strong></div>
+<div class="metric"><span>Dew point</span><strong id="dew">—</strong></div>
+<div class="metric"><span>Previous 24-hour rainfall</span><strong id="rain24">—</strong></div>
+<div class="metric"><span>Forecast time</span><strong id="forecastTime">—</strong></div>
+</div>
+</div>
+
+<div class="section">
+<h3>08 | HOURLY TEMPERATURE & HUMIDITY</h3>
+<div class="chart large"><canvas id="weatherChart"></canvas></div>
+</div>
+
+<div class="section">
+<h3>09 | FIRE WEATHER SCREENING TREND</h3>
+<div class="chart"><canvas id="riskChart"></canvas></div>
+</div>
+
+<div class="section">
+<h3>10 | LOCATION COMPARISON</h3>
+<table>
+<thead><tr><th>Location</th><th>Temp °C</th><th>RH %</th><th>Index</th></tr></thead>
+<tbody id="comparison"></tbody>
+</table>
+</div>
+
+<div class="section">
+<h3>11 | FORECAST INTERPRETATION</h3>
+<div id="interpretation" class="small">Waiting for data...</div>
+</div>
+
+<div class="section">
+<h3>12 | DATA AND MODEL LIMITATIONS</h3>
+<div class="notice">
+The Fire Weather Screening Index is a transparent weather-based screening indicator. It is NOT a validated Probability of Fire forecast or the Canadian Fire Weather Index.
+
+It does not independently measure fuel moisture, vegetation condition, ignition probability, active fires or fire spread.
+
+Ground observations and historical fire records are needed for validation.
+</div>
+</div>
+
+</aside>
+</main>
+
+<footer>
+Produced by Ansu Singhateh | GIS Analyst | GIS / Cartography Unit | Gambia Bureau of Statistics<br>
+SILKYSINGZ GEOAI • NIGHTTIME LIGHT INTELLIGENCE • Research and educational use
+</footer>
+
+<script>
+
+/* ====================================================
+   1. MONITORING NETWORK
+==================================================== */
+
+const locations=[
+{name:'Banjul',lat:13.4549,lon:-16.5790},
+{name:'Serekunda',lat:13.4383,lon:-16.6781},
+{name:'Brikama',lat:13.2714,lon:-16.6494},
+{name:'Gunjur',lat:13.2019,lon:-16.7339},
+{name:'Kerewan',lat:13.4890,lon:-16.0910},
+{name:'Farafenni',lat:13.5667,lon:-15.6000},
+{name:'Soma',lat:13.4333,lon:-15.5333},
+{name:'Janjanbureh',lat:13.5333,lon:-14.7667},
+{name:'Kuntaur',lat:13.6667,lon:-14.8833},
+{name:'Bansang',lat:13.4333,lon:-14.6500},
+{name:'Basse Santa Su',lat:13.3100,lon:-14.2130},
+{name:'Fatoto',lat:13.1900,lon:-14.2200}
+];
+
+let weatherData=[];
+let markers=[];
+let charts={};
+let currentLocation=0;
+
+const $=id=>document.getElementById(id);
+const fmt=(v,d=1)=>Number(v||0).toFixed(d);
+
+/* ====================================================
+   2. MAP INITIALISATION
+==================================================== */
+
+const map=L.map('map',{preferCanvas:true}).setView([13.45,-15.55],8);
+
+const tiles={
+dark:L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?key=cb1_5hhb_1_8dda287f1ba21da300e7b42c',{attribution:'© CARTO'}),
+light:L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_5hhb_1_8dda287f1ba21da300e7b42c',{attribution:'© CARTO'}),
+osm:L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}),
+satellite:L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'© Esri'})
+};
+
+let base=tiles.dark;
+base.addTo(map);
+
+$('basemap').addEventListener('change',()=>{
+ map.removeLayer(base);
+ base=tiles[$('basemap').value];
+ base.addTo(map);
+});
+
+/* ====================================================
+   3. LOCATION SELECTOR
+==================================================== */
+
+locations.forEach((l,i)=>{
+ const option=document.createElement('option');
+ option.value=i;
+ option.textContent=l.name;
+ $('location').appendChild(option);
+});
+
+$('location').addEventListener('change',()=>{
+ currentLocation=Number($('location').value);
+ updateDashboard();
+ map.setView([locations[currentLocation].lat,locations[currentLocation].lon],10);
+});
+
+$('day').addEventListener('change',updateDashboard);
+$('hour').addEventListener('input',updateDashboard);
+$('layer').addEventListener('change',drawMap);
+
+function resetView(){
+ map.setView([13.45,-15.55],8);
+}
+
+/* ====================================================
+   4. ECMWF FORECAST DATA
+==================================================== */
+
+async function refreshData(){
+ $('loading').style.display='flex';
+ $('status').textContent='FETCHING ECMWF DATA';
+
+ try{
+ const lat=locations.map(x=>x.lat).join(',');
+ const lon=locations.map(x=>x.lon).join(',');
+
+ const params=new URLSearchParams({
+ latitude:lat,
+ longitude:lon,
+ hourly:[
+ 'temperature_2m',
+ 'relative_humidity_2m',
+ 'precipitation',
+ 'wind_speed_10m',
+ 'wind_gusts_10m',
+ 'dew_point_2m'
+ ].join(','),
+ forecast_days:'7',
+ timezone:'Africa/Banjul',
+ wind_speed_unit:'ms',
+ precipitation_unit:'mm'
+ });
+
+ const url='https://api.open-meteo.com/v1/ecmwf?'+params.toString();
+ const response=await fetch(url);
+
+ if(!response.ok)throw new Error('Forecast service returned HTTP '+response.status);
+
+ const data=await response.json();
+ const records=Array.isArray(data)?data:[data];
+
+ if(records.length!==locations.length){
+ throw new Error('Unexpected number of forecast locations.');
+ }
+
+ weatherData=records.map((record,i)=>{
+ if(!record.hourly||!record.hourly.time)throw new Error('Missing hourly forecast for '+locations[i].name);
+ return{
+ location:locations[i],
+ time:record.hourly.time,
+ temperature:record.hourly.temperature_2m,
+ humidity:record.hourly.relative_humidity_2m,
+ precipitation:record.hourly.precipitation,
+ wind:record.hourly.wind_speed_10m,
+ gust:record.hourly.wind_gusts_10m,
+ dew:record.hourly.dew_point_2m
+ };
+ });
+
+ $('updated').textContent='Last retrieved: '+new Date().toLocaleString('en-GB');
+ $('status').textContent='ECMWF DATA CONNECTED';
+ $('loading').style.display='none';
+
+ drawMap();
+ updateDashboard();
+ updateComparison();
+
+ }catch(e){
+ $('loading').innerHTML='ECMWF DATA CONNECTION ERROR<br><br>'+e.message+
+ '<br><br>Check internet connectivity and refresh the forecast.';
+ $('status').textContent='CONNECTION ERROR';
+ console.error(e);
+ }
+}
+
+/* ====================================================
+   5. FIRE WEATHER SCREENING INDEX
+==================================================== */
+
+/*
+Transparent screening heuristic.
+NOT a calibrated Probability of Fire model.
+*/
+
+function clamp(x,min,max){
+ return Math.max(min,Math.min(max,x));
+}
+
+function getRisk(d,i){
+ const temp=d.temperature[i];
+ const rh=d.humidity[i];
+ const wind=d.wind[i];
+
+ if(!Number.isFinite(temp)||!Number.isFinite(rh)||!Number.isFinite(wind))return null;
+
+ const dryHours=Number($('dryPeriod').value);
+ let rain=0;
+
+ const start=Math.max(0,i-dryHours+1);
+ for(let j=start;j<=i;j++){
+ rain+=Number(d.precipitation[j]||0);
+ }
+
+ const t=Number($('tempThreshold').value);
+ const h=Number($('humidityThreshold').value);
+ const w=Number($('windThreshold').value);
+
+ const temperatureScore=clamp(temp/t*100,0,100);
+ const humidityScore=clamp((100-rh)/(100-h)*100,0,100);
+ const windScore=clamp(wind/w*100,0,100);
+ const drynessScore=clamp(100-rain/10*100,0,100);
+
+ return clamp(
+ temperatureScore*.35+
+ humidityScore*.30+
+ windScore*.20+
+ drynessScore*.15,0,100
+ );
+}
+
+function category(r){
+ if(r===null)return{label:'Unavailable',color:'#778899'};
+ if(r<25)return{label:'Low',color:'#32c98a'};
+ if(r<45)return{label:'Moderate',color:'#e5c64c'};
+ if(r<65)return{label:'High',color:'#ef963b'};
+ if(r<80)return{label:'Very High',color:'#ec514c'};
+ return{label:'Extreme',color:'#a93cce'};
+}
+
+function recalculate(){
+ if(!weatherData.length)return;
+ drawMap();
+ updateDashboard();
+ updateComparison();
+}
+
+/* ====================================================
+   6. MAP RENDERING
+==================================================== */
+
+function drawMap(){
+ if(!weatherData.length)return;
+
+ markers.forEach(m=>map.removeLayer(m));
+ markers=[];
+
+ const day=Number($('day').value);
+ const hour=Number($('hour').value);
+ const idx=day*24+hour;
+ const layer=$('layer').value;
+
+ weatherData.forEach(d=>{
+ const i=Math.min(idx,d.time.length-1);
+ let val=0;
+
+ if(layer==='risk')val=getRisk(d,i);
+ if(layer==='temperature')val=d.temperature[i];
+ if(layer==='humidity')val=d.humidity[i];
+ if(layer==='rain')val=d.precipitation[i];
+ if(layer==='wind')val=d.wind[i];
+ if(layer==='gust')val=d.gust[i];
+
+ if(!Number.isFinite(val))return;
+
+ let color;
+
+ if(layer==='risk'){
+ color=category(val).color;
+ }else if(layer==='temperature'){
+ color=val>=38?'#ed4d4d':val>=32?'#ef963b':val>=25?'#e5c64c':'#32c98a';
+ }else if(layer==='humidity'){
+ color=val<25?'#ed4d4d':val<40?'#ef963b':val<65?'#e5c64c':'#32c98a';
+ }else if(layer==='rain'){
+ color=val>=10?'#3189e8':val>=2?'#21c5d8':'#9eabb4';
+ }else{
+ color=val>=15?'#ed4d4d':val>=10?'#ef963b':'#32c98a';
+ }
+
+ const marker=L.circleMarker(
+ [d.location.lat,d.location.lon],
+ {
+ radius:9+Math.min(val/15,5),
+ color:'#ffffff',weight:1,
+ fillColor:color,fillOpacity:.9
+ }
+ );
+
+ marker.bindPopup(`
+ <b>${d.location.name}</b><hr>
+ Temperature: ${fmt(d.temperature[i])} °C<br>
+ Humidity: ${fmt(d.humidity[i],0)} %<br>
+ Wind: ${fmt(d.wind[i])} m/s<br>
+ Rainfall: ${fmt(d.precipitation[i])} mm<br>
+ Screening index: ${fmt(getRisk(d,i),1)}<br>
+ Category: ${category(getRisk(d,i)).label}<br>
+ Forecast: ${d.time[i]}
+ `);
+
+ marker.on('click',()=>{
+ currentLocation=weatherData.indexOf(d);
+ $('location').value=currentLocation;
+ updateDashboard();
+ });
+
+ marker.addTo(map);
+ markers.push(marker);
+ });
+}
+
+/* ====================================================
+   7. DASHBOARD UPDATE
+==================================================== */
+
+function updateDashboard(){
+ if(!weatherData.length)return;
+
+ const d=weatherData[currentLocation];
+ const day=Number($('day').value);
+ const hour=Number($('hour').value);
+ const i=Math.min(day*24+hour,d.time.length-1);
+
+ const risk=getRisk(d,i);
+ const c=category(risk);
+
+ $('hourLabel').textContent=String(hour).padStart(2,'0')+':00 GMT';
+ $('temp').textContent=fmt(d.temperature[i]);
+ $('humidity').textContent=fmt(d.humidity[i],0);
+ $('wind').textContent=fmt(d.wind[i]);
+ $('rain').textContent=fmt(d.precipitation[i]);
+ $('risk').textContent=fmt(risk,0);
+ $('category').textContent=c.label;
+ $('category').style.color=c.color;
+
+ $('gust').textContent=fmt(d.gust[i])+' m/s';
+ $('dew').textContent=fmt(d.dew[i])+' °C';
+
+ let rain24=0;
+ for(let j=Math.max(0,i-23);j<=i;j++){
+ rain24+=Number(d.precipitation[j]||0);
+ }
+
+ $('rain24').textContent=fmt(rain24)+' mm';
+ $('forecastTime').textContent=d.time[i].replace('T',' ');
+
+ drawCharts(d,i);
+ drawMap();
+ writeInterpretation(d,i,risk);
+}
+
+/* ====================================================
+   8. CHARTS
+==================================================== */
+
+function chart(id,type,data,options={}){
+ if(charts[id])charts[id].destroy();
+
+ charts[id]=new Chart($(id),{
+ type,
+ data,
+ options:{
+ responsive:true,
+ maintainAspectRatio:false,
+ interaction:{intersect:false,mode:'index'},
+ plugins:{
+ legend:{labels:{color:'#a9bdce',font:{size:9}}}
+ },
+ scales:{
+ x:{ticks:{color:'#91a5b7',font:{size:8},maxTicksLimit:8},grid:{color:'#263b4d'}},
+ y:{ticks:{color:'#91a5b7',font:{size:8}},grid:{color:'#263b4d'}}
+ },
+ ...options
+ }
+ });
+}
+
+function drawCharts(d,index){
+ const start=Number($('day').value)*24;
+ const end=Math.min(start+24,d.time.length);
+
+ const labels=d.time.slice(start,end).map(t=>t.slice(11,16));
+
+ chart('weatherChart','line',{
+ labels,
+ datasets:[
+ {
+ label:'Temperature °C',
+ data:d.temperature.slice(start,end),
+ borderColor:'#ed963b',
+ backgroundColor:'#ed963b25',
+ fill:true,tension:.3,yAxisID:'y'
+ },
+ {
+ label:'Humidity %',
+ data:d.humidity.slice(start,end),
+ borderColor:'#21c5d8',
+ tension:.3,yAxisID:'y1'
+ }
+ ]
+ },{
+ scales:{
+ x:{ticks:{color:'#91a5b7',font:{size:8},maxTicksLimit:8},grid:{color:'#263b4d'}},
+ y:{position:'left',ticks:{color:'#ed963b'},grid:{color:'#263b4d'}},
+ y1:{position:'right',ticks:{color:'#21c5d8'},grid:{drawOnChartArea:false},min:0,max:100}
+ }
+ });
+
+ const risks=d.time.map((t,i)=>getRisk(d,i));
+
+ chart('riskChart','line',{
+ labels:d.time.map(t=>t.slice(5,16).replace('T',' ')),
+ datasets:[{
+ label:'Fire-weather screening index',
+ data:risks,
+ borderColor:'#ed963b',
+ backgroundColor:'#ed963b25',
+ fill:true,tension:.3,
+ pointRadius:0
+ }]
+ });
+}
+
+/* ====================================================
+   9. LOCATION COMPARISON
+==================================================== */
+
+function updateComparison(){
+ if(!weatherData.length)return;
+
+ const day=Number($('day').value);
+ const hour=Number($('hour').value);
+ const i=day*24+hour;
+
+ $('comparison').innerHTML=weatherData.map(d=>{
+ const r=getRisk(d,i);
+ return `<tr>
+ <td>${d.location.name}</td>
+ <td>${fmt(d.temperature[i])}</td>
+ <td>${fmt(d.humidity[i],0)}</td>
+ <td style="color:${category(r).color}">${fmt(r,0)}</td>
+ </tr>`;
+ }).join('');
+}
+
+/* ====================================================
+   10. INTERPRETATION
+==================================================== */
+
+function writeInterpretation(d,i,risk){
+ const temp=d.temperature[i];
+ const rh=d.humidity[i];
+ const wind=d.wind[i];
+
+ let text='';
+
+ if(risk>=80){
+ text='<b style="color:#c47ce1">Extreme weather screening conditions.</b> Temperature, humidity, wind and recent rainfall indicate elevated weather-related fire danger. Verify local conditions and alert relevant monitoring teams.';
+ }else if(risk>=65){
+ text='<b style="color:#ec514c">Very high screening conditions.</b> Weather conditions may support rapid fire development and spread. Prioritise field verification and situational monitoring.';
+ }else if(risk>=45){
+ text='<b style="color:#ef963b">High screening conditions.</b> Some meteorological conditions are favourable to fire activity. Monitor vegetation dryness, rainfall and wind.';
+ }else if(risk>=25){
+ text='<b style="color:#e5c64c">Moderate screening conditions.</b> Continue routine environmental monitoring and observe changing weather conditions.';
+ }else{
+ text='<b style="color:#32c98a">Low screening conditions.</b> Current weather indicators suggest relatively less favourable fire-weather conditions.';
+ }
+
+ $('interpretation').innerHTML=`
+ <b>${d.location.name}</b><br>
+ Forecast: ${d.time[i]} GMT<br><br>
+ ${text}<br><br>
+ Temperature: ${fmt(temp)} °C<br>
+ Relative humidity: ${fmt(rh)} %<br>
+ Wind speed: ${fmt(wind)} m/s<br><br>
+ <b>Interpretation caution:</b> This screening index describes forecast weather conditions, not the probability of an ignition or actual fire occurrence.
+ `;
+}
+
+/* ====================================================
+   11. EXPORT CSV
+==================================================== */
+
+function download(data,name,type){
+ const blob=new Blob([data],{type});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;a.download=name;a.click();
+ URL.revokeObjectURL(url);
+}
+
+function exportCSV(){
+ if(!weatherData.length)return;
+
+ const rows=[[
+ 'Location','Latitude','Longitude','Forecast Time',
+ 'Temperature_C','Relative_Humidity_pct','Precipitation_mm',
+ 'Wind_ms','Wind_Gust_ms','Dew_Point_C','Fire_Weather_Screening_Index'
+ ]];
+
+ weatherData.forEach(d=>{
+ d.time.forEach((t,i)=>{
+ rows.push([
+ d.location.name,d.location.lat,d.location.lon,t,
+ d.temperature[i],d.humidity[i],d.precipitation[i],
+ d.wind[i],d.gust[i],d.dew[i],getRisk(d,i)
+ ]);
+ });
+ });
+
+ const csv=rows.map(row=>row.map(v=>
+ '"'+String(v??'').replace(/"/g,'""')+'"'
+ ).join(',')).join('\n');
+
+ download(csv,'Gambia_ECMWF_Fire_Weather_Forecast.csv','text/csv');
+}
+
+/* ====================================================
+   12. EXPORT GEOJSON
+==================================================== */
+
+function exportGeoJSON(){
+ const day=Number($('day').value);
+ const hour=Number($('hour').value);
+ const i=day*24+hour;
+
+ const features=weatherData.map(d=>({
+ type:'Feature',
+ geometry:{
+ type:'Point',
+ coordinates:[d.location.lon,d.location.lat]
+ },
+ properties:{
+ location:d.location.name,
+ forecast_time:d.time[i],
+ temperature_C:d.temperature[i],
+ humidity_pct:d.humidity[i],
+ precipitation_mm:d.precipitation[i],
+ wind_speed_ms:d.wind[i],
+ wind_gust_ms:d.gust[i],
+ dew_point_C:d.dew[i],
+ fire_weather_screening_index:getRisk(d,i),
+ category:category(getRisk(d,i)).label
+ }
+ }));
+
+ download(JSON.stringify({
+ type:'FeatureCollection',
+ name:'Gambia_ECMWF_Fire_Weather',
+ features
+ },null,2),'Gambia_Fire_Weather.geojson','application/geo+json');
+}
+
+/* ====================================================
+   13. START APPLICATION
+==================================================== */
+
+$('day').addEventListener('change',()=>{
+ updateDashboard();
+ updateComparison();
+});
+
+$('hour').addEventListener('input',()=>{
+ updateDashboard();
+ updateComparison();
+});
+
+refreshData();
+
+</script>
+</body>
+</html>
+",
     {attribution:"© OpenStreetMap © CARTO",subdomains:"abcd",maxZoom:19}
   ),
   "OpenStreetMap":L.tileLayer(
